@@ -1,0 +1,33 @@
+Coverage Report Summary Data by file
+
+=================================================================================
+=== File: source/flex_counter.sv
+=================================================================================
+    Enabled Coverage            Active      Hits    Misses % Covered
+    ----------------            ------      ----    ------ ---------
+    Stmts                           17        17         0     100.0
+    Branches                         9         9         0     100.0
+    FEC Condition Terms              0         0         0     100.0
+    FEC Expression Terms             0         0         0     100.0
+    FSMs                                                       100.0
+        States                       0         0         0     100.0
+        Transitions                  0         0         0     100.0
+    Toggle Bins                     46        37         9      80.4
+
+=================================================================================
+=== File: source/tb_flex_counter.sv
+=================================================================================
+    Enabled Coverage            Active      Hits    Misses % Covered
+    ----------------            ------      ----    ------ ---------
+    Stmts                          101        95         6      94.0
+    Branches                        12         6         6      50.0
+    FEC Condition Terms             12         0        12       0.0
+    FEC Expression Terms             0         0         0     100.0
+    FSMs                                                       100.0
+        States                       0         0         0     100.0
+        Transitions                  0         0         0     100.0
+    Toggle Bins                     90        21        69      23.3
+
+
+Total Coverage By File (code coverage only, filtered view): 52.2%
+

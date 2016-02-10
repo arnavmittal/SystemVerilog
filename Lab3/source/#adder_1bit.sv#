@@ -1,0 +1,21 @@
+// $Id: $
+// File name:   adder_1bit.sv
+// Created:     1/26/2016
+// Author:      Arnav Mittal
+// Lab Section: 337-05
+// Version:     1.0  Initial Design Entry
+// Description: This is the code for 1 Bit Full Adder Module
+
+module adder_1bit
+(
+	input wire a,
+	input wire b,
+	input wire carry_in,
+	output wire sum,
+	output wire carry_out
+);
+  
+	assign sum = carry_in ^ (a ^ b);
+	assign carry_out = ((~ carry_in) & b & a) | (carry_in & (b | a));
+
+endmodule 

@@ -1,0 +1,56 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 d/home/ecegrid/a/mg150/ece337/Lab2/source
+vsensor_d
+Z1 DXx6 sv_std 3 std 0 22 <EOTafDcUY:cQeO^ICn]m3
+!s110 1453481197
+!i10b 1
+!s100 Y^DcFIE<akWEbgezC7dPW3
+Imz0[?13]1];JHzl6VPB]^1
+Z2 V`JN@9S9cnhjKRR_L]QIcM3
+!s105 sensor_b_sv_unit
+S1
+R0
+w1453481194
+8sensor_b.sv
+Fsensor_b.sv
+L0 9
+Z3 OL;L;10.3b;59
+r1
+!s85 0
+31
+!s108 1453481197.784871
+!s107 sensor_b.sv|
+!s90 -reportprogress|300|sensor_b.sv|
+!i113 0
+Z4 o-L mtiAvm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+vsensor_s
+R1
+!s110 1453480670
+!i10b 1
+!s100 9S7gfJg]@b[]f_FZN`DT=1
+IXYE>M94R1EO4=zdj^o7Bd0
+R2
+!s105 sensor_s_sv_unit
+S1
+R0
+w1453478737
+8sensor_s.sv
+Fsensor_s.sv
+L0 9
+R3
+r1
+!s85 0
+31
+!s108 1453480670.640387
+!s107 sensor_s.sv|
+!s90 -reportprogress|300|sensor_s.sv|
+!i113 0
+R4
