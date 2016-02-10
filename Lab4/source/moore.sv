@@ -29,29 +29,33 @@ module moore
 		end
 	end
 	
-	always_comb:
-	next_state = state // DEFAULT CASE
-	case(state):
-		WAITING:
-		begin
-			next_state=(i==1'b1)?RCV1:WAITING;
-		end
-		RCV1:
-		begin
-			next_state=(i==1'b1)?RCV11:WAITING;
-		end
-		RCV11:
-		begin
-			next_state=(i==1'b0)?RCV110:RCV11;
-		end
-		RCV110:
-		begin
-			next_state=(i==1'b1)?RCV1101:WAITING;
-		end
-		RCV1101:
-		begin
-			next_state=(i==1'b1)?RCV11:WAITING;
-		end
+	assign o = (state == RCV1101);	
+	
+	always_comb
+	begin
+		next_state = state; // DEFAULT CASE
+		case(state)
+			WAITING:
+			begin
+				next_state=(i==1'b1)?RCV1:WAITING;
+			end
+			RCV1:
+			begin
+				next_state=(i==1'b1)?RCV11:WAITING;
+			end
+			RCV11:
+			begin
+				next_state=(i==1'b0)?RCV110:RCV11;
+			end
+			RCV110:
+			begin
+				next_state=(i==1'b1)?RCV1101:WAITING;
+			end
+			RCV1101:
+			begin
+				next_state=(i==1'b1)?RCV11:WAITING;
+			end
+		endcase
+	end
 
-	assign o = (state == RCV1101)? 1'b1 : 1'b0;
 endmodule 
