@@ -54,6 +54,8 @@ module tb_moore ();
 		tb_n_rst = 1'b1;
 		@(posedge tb_clk);
 
+		#1;
+
 		if(tb_o == 1'b0)
 			$info("TESTCASE 2 works.");
 		else
@@ -62,6 +64,8 @@ module tb_moore ();
 		//TESTCASE == 3 INPUT = 1
 		tb_i = 1'b1;
 		@(posedge tb_clk);
+
+		#1;
 
 		if(tb_o == 1'b0)
 			$info("TESTCASE 3 works.");
@@ -72,6 +76,8 @@ module tb_moore ();
 		tb_i = 1'b0;
 		@(posedge tb_clk);
 
+		#1;
+
 		if(tb_o == 1'b0)
 			$info("TESTCASE 4 works.");
 		else
@@ -80,13 +86,83 @@ module tb_moore ();
 		//TESTCASE == 5 INPUT = 1
 		tb_i = 1'b1;
 		@(posedge tb_clk);
+
 		#1;
+
 		if(tb_o == 1'b1)
 			$info("TESTCASE 5 works.");
 		else
 			$error("TESTCASE 5 RCV1101 doesn't work.");
-		
+	
+		//TESTCASE == 6 INPUT = 1
+		tb_i = 1'b1;
 		@(posedge tb_clk);
+
+		#1;
+
+		if(tb_o == 1'b0)
+			$info("TESTCASE 6 works.");
+		else
+			$error("TESTCASE 6 RCV11011 doesn't work.");		
+
+		//TESTCASE == 7 INPUT = 0
+		tb_i = 1'b0;
+		@(posedge tb_clk);
+
+		#1;
+
+		if(tb_o == 1'b0)
+			$info("TESTCASE 7 works.");
+		else
+			$error("TESTCASE 7 RCV110110 doesn't work.");
+	
+		//TESTCASE == 8 INPUT = 1
+		tb_i = 1'b1;
+		@(posedge tb_clk);
+
+		#1;
+
+		if(tb_o == 1'b1)
+			$info("TESTCASE 8 works.");
+		else
+			$error("TESTCASE 8 RCV1101101 doesn't work.");
+		
+		//TESTCASE == 9 RESET in RCV1101101
+		tb_n_rst = 1'b0;
+		@(posedge tb_clk);
+
+		#1;
+
+		if(tb_o == 1'b0)
+			$info("TESTCASE 9 works.");
+		else
+			$error("TESTCASE 9 RCV1101101 RESET doesn't work.");
+
+		//TESTCASE == 10 INPUT = 1
+		tb_i = 1'b1;
+		tb_n_rst = 1'b1;
+		@(posedge tb_clk);
+
+		#1;
+
+		if(tb_o == 1'b0)
+			$info("TESTCASE 10 works.");
+		else
+			$error("TESTCASE 10 RCV1 doesn't work.");
+		
+		//TESTCASE == 11 RESET in RCV11011011
+		tb_n_rst = 1'b0;
+		@(posedge tb_clk);
+
+		#1;
+
+		if(tb_o == 1'b0)
+			$info("TESTCASE 11 works.");
+		else
+			$error("TESTCASE 11 RCV11011011 RESET doesn't work.");
+
+		@(posedge tb_clk);
+
 	end
 
 endmodule
