@@ -50,7 +50,14 @@ module mealy
 			RCV110:
 			begin
 				next_state=(i==1'b1)?RCV1:WAITING;
-				o = 1'b1;
+				if(next_state == RCV1)
+				begin
+					o = 1'b1;
+				end
+			end
+			default:
+			begin
+				next_state = WAITING;
 			end
 		endcase
 	end

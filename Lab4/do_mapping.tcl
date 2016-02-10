@@ -1,6 +1,6 @@
 # Step 1:  Read in the source file
-analyze -format sverilog -lib WORK { moore.sv}
-elaborate moore -lib WORK
+analyze -format sverilog -lib WORK { mealy.sv}
+elaborate mealy -lib WORK
 uniquify
 # Step 2: Set design constraints
 # Uncomment below to set timing, area, power, etc. constraints
@@ -13,12 +13,12 @@ uniquify
 compile -map_effort medium
 
 # Step 4: Output reports
-report_timing -path full -delay max -max_paths 1 -nworst 1 > reports/moore.rep
-report_area >> reports/moore.rep
-report_power -hier >> reports/moore.rep
+report_timing -path full -delay max -max_paths 1 -nworst 1 > reports/mealy.rep
+report_area >> reports/mealy.rep
+report_power -hier >> reports/mealy.rep
 
 # Step 5: Output final VHDL and Verilog files
-write_file -format verilog -hierarchy -output "mapped/moore.v"
+write_file -format verilog -hierarchy -output "mapped/mealy.v"
 echo "\nScript Done\n"
 echo "\nChecking Design\n"
 check_design
