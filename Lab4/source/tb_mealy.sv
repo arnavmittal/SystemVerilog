@@ -19,7 +19,7 @@ module tb_mealy ();
 	reg tb_i;
 	reg tb_o;
 	
-	moore DUT
+	mealy DUT
 	(
 		.clk(tb_clk),
 		.n_rst(tb_n_rst),
