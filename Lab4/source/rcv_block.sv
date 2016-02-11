@@ -18,14 +18,17 @@ module rcv_block
 	output reg framing_error
 	
 );
-	reg shift_strobe;
-	reg [7:0] packet_data;
-	reg stop_bit;
-	reg load_buffer;
+
 	reg sbc_enable;
 	reg sbc_clear;
+	reg load_buffer;
 	reg enable_timer;
+
 	reg packet_done;
+	reg shift_strobe;
+
+	reg [7:0] packet_data;
+	reg stop_bit;
 	reg start_bit_detected;
 
 
