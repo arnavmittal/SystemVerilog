@@ -15,25 +15,22 @@ module timer
 	output wire packet_done
 );
 
-	reg state, next_state;
+	reg state;
 	reg [3:0] count1, count2;
-	wire clr;
 
 	always_ff@ (posedge clk, negedge n_rst)
 	begin
-		state <= enable_timer;
 		if(n_rst == 1'b0)
 		begin
 			state <= 1'b0;
 		end
 		else
 		begin
-			next_state <= enable_timer;
-			state <= next_state;
+			state <= enable_timer;
 		end
 	end
 
-	flex_counter #(.NUM_BITS(4)) DUT(.clk(clk),.n_rst(n_rst),.clear(clr),.count_enable(state),.rollover_val(4'b1010),.count_out(count1),.rollover_flag(shift_strobe));
-	flex_counter #(.NUM_BITS(4)) DUT(.clk(clk),.n_rst(n_rst),.clear(clr),.count_enable(state),.rollover_val(4'b1001),.count_out(count1),.rollover_flag(shift_strobe));
+	flex_counter #(.NUM_BITS(4)) DUT(.clk(clk),.n_rst(n_rst),.clear(packet_done),.count_enable(state),.rollover_val(4'b1010),.count_out(count1),.rollover_flag(shift_strobe));
+	flex_counter #(.NUM_BITS(4)) DUT(.clk(clk),.n_rst(n_rst),.clear(packet_done),.count_enable(shift_strobe),.rollover_val(4'b1001),.count_out(count2),.rollover_flag(packet_done));
 
 endmodule 
