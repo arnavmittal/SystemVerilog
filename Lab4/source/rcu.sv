@@ -21,7 +21,7 @@ module rcu
 
 	typedef enum logic [2:0] { IDLE, START, SBC, CHECK, VALID} state_type;
 	state_type state, next_state;
-	
+
 	always_ff @ (posedge clk, negedge n_rst)
 	begin
 		if(n_rst == 1'b0)
@@ -34,11 +34,6 @@ module rcu
 		end
 	end
 
-	assign sbc_clear = 1'b0;
-	assign sbc_enable = 1'b0;
-	assign load_buffer = 1'b0;
-	assign enable_timer = 1'b0;	
-
 	always_comb
 	begin
 		next_state = state; // DEFAULT CASE
@@ -47,8 +42,6 @@ module rcu
 			begin
 				if(start_bit_detected == 1'b1)
 				begin
-					enable_timer = 1'b1;
-					sbc_clear = 1'b1;
 					next_state = START;
 				end
 				else
@@ -69,7 +62,6 @@ module rcu
 			end
 			SBC:
 			begin
-				sbc_enable = 1'b1;
 				next_state = CHECK;
 			end
 			CHECK:
@@ -85,9 +77,18 @@ module rcu
 			end
 			VALID:
 			begin
-				load_buffer = 1;
 				next_state = IDLE;
+			end
+			default
+			begin
+				next_state = state;
 			end
 		endcase	
 	end
+	
+	assign sbc_clear = ( state == START );
+	assign enable_timer = ( state == START );
+	assign sbc_enable = ( state == SBC );
+	assign load_buffer = ( state == VALID );
+
 endmodule

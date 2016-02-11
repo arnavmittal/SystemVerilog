@@ -6,20 +6,20 @@
 // Version:     1.0  Initial Design Entry
 // Description: This is the module for receiving block of the UART module design.
 
-module rcv_blobk
+module rcv_block
 (
 	input wire clk,
 	input wire n_rst,
 	input wire serial_in,
 	input wire data_read,
-	output wire [7:0] rx_data,
-	output wire data_ready,
-	output wire overrun_error,
-	output wire framing_error
+	output reg [7:0] rx_data,
+	output reg data_ready,
+	output reg overrun_error,
+	output reg framing_error
+	
 );
-
 	reg shift_strobe;
-	reg [7:0]packet_data;
+	reg [7:0] packet_data;
 	reg stop_bit;
 	reg load_buffer;
 	reg sbc_enable;
@@ -30,7 +30,7 @@ module rcv_blobk
 
 
 
-	sr_9bit  
+	sr_9bit SR_9BIT 
 	(
 		.clk         (clk),
 		.n_rst       (n_rst),
@@ -40,7 +40,7 @@ module rcv_blobk
 		.stop_bit    (stop_bit)
 	);
 
-	start_bit_det 
+	start_bit_det START_BIT_DET
 	(
 		.clk               (clk),
 		.n_rst             (n_rst),
@@ -48,7 +48,7 @@ module rcv_blobk
 		.start_bit_detected(start_bit_detected)	
 	);
 
-	stop_bit_chk 
+	stop_bit_chk STOP_BIT_CHK
 	(
 		.clk          (clk),
 		.n_rst        (n_rst),
@@ -58,7 +58,7 @@ module rcv_blobk
 		.framing_error(framing_error)
 	);
 
-	timer 
+	timer TIMER 
 	(
 		.clk         (clk),
 		.n_rst       (n_rst),
@@ -67,7 +67,7 @@ module rcv_blobk
 		.packet_done (packet_done)
 	);
 
-	rcu 
+	rcu RCU 
 	(
 		.clk               (clk),
 		.n_rst             (n_rst),
@@ -80,7 +80,7 @@ module rcv_blobk
 		.enable_timer      (enable_timer)
 	);
 
-	rx_data_buff 
+	rx_data_buff RX_DATA_BUFFER
 	(
 		.clk          (clk),
 		.n_rst        (n_rst),

@@ -18,9 +18,19 @@ module sr_9bit
 
 	reg [8:0]final_out;
 
-	flex_stp_sr #(9,0) DUT(.clk(clk),.n_rst(n_rst),.shift_enable(shift_strobe),.serial_in(serial_in),.parallel_out(final_out));
+	flex_stp_sr #(9,0) DUT3(.clk(clk),.n_rst(n_rst),.shift_enable(shift_strobe),.serial_in(serial_in),.parallel_out(final_out));
 
 	assign stop_bit = final_out[8];
 	assign packet_data = final_out[7:0];
+	
+	/*always_comb
+	begin
+	 	$display("---------------------------------Shift strobe" );
+	 	$display( shift_strobe );
+	 	$display("---------------------------------Packet data " );
+	 	$display( packet_data );
+		$display( stop_bit );
+	end*/
+
 
 endmodule
