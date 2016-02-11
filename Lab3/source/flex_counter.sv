@@ -7,6 +7,7 @@
 // Description: This is the module for Flexible and Scalable counter with a Controlled Rollover
 
 
+
 module flex_counter
 
 #(
@@ -26,6 +27,17 @@ module flex_counter
 	reg [(NUM_CNT_BITS-1):0] curr_count;
 	reg next_rollover_flag;
 	reg curr_rollover_flag;
+	
+	//DEBUG CODE
+	/*always_comb
+	begin
+		$display("	RCV CLEAR");
+		$display(clear);		
+		$display("	RCV COUNT_ENABLE");
+		$display(count_enable);
+		$display("	RCV ROLLOVER VALUE");
+		$display(rollover_val);
+	end*/
 
 	always_ff @ (posedge clk, negedge n_rst)
 	begin
@@ -43,8 +55,8 @@ module flex_counter
 
 	always_comb
 	begin
-		next_count = curr_count;//CHANGED FROM 0;
-		next_rollover_flag = curr_rollover_flag;//CHANGED FROM 0;
+		next_count = '0;
+		next_rollover_flag = '0;
 		if(clear == 1'b1) //CLEAR == 1
 		begin
 			next_count = '0;
@@ -64,12 +76,25 @@ module flex_counter
 				if (curr_count == rollover_val )
 				begin
 					next_rollover_flag = 1'b0;
-					next_count = 1'b1;
+					next_count = {'0,1'b1};
 				end
+			end
+			else
+			begin
+				next_count = curr_count;
+				next_rollover_flag = curr_rollover_flag;
 			end
 		end
 	end
 
 	assign count_out = curr_count;
 	assign rollover_flag = curr_rollover_flag;
-endmodule 
+	//DEBUG CODE
+	/*always_comb
+	begin
+		$display("	OUT COUNT OUT");
+		$display(count_out[3:0]);		
+		$display("	OUT ROLLOVER FLAG");
+		$display(rollover_flag);
+	end*/
+endmodule
