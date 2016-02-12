@@ -1,0 +1,24 @@
+1.   Arnav Mittal
+	5
+	5
+	5
+	5
+	4 
+
+     Sam Sowell
+	4
+	5
+	5
+	5
+	3
+
+2.    Arnav - Figuered out the logic for timer, sr_9bit, rcv blocks. Helped in debugging the flex_counter.
+      Sam - Figuered out the state diagram for the rcu block. 
+ 
+3.    We met 3 times and worked on the lab.
+
+4.    I helped in resolving the moore diagram for the RCU. I helped in debugging the code for the rcu block. I helped in explaining the timer block functionality.
+
+5.    Sam helped in correcting me for moore model and logic for devising the correct state transition diagram for rcu block.
+
+6.    I did not use any testbench from piazza. I added more testcases and debugging statements for printing to point me towards the source of the error.
