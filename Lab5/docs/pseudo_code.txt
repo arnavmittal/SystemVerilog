@@ -1,0 +1,43 @@
+PSEUDO CODE FOR 4 point FIR Filter
+
+idle:   if (data_ready = 0) goto idle
+
+store:  if (data_ready = 0) goto eidle
+				modwait = 1
+    		reg[5] = data
+   	 		err = 0
+
+zero:   reg[0] = 0
+
+sort1:  reg[1] = reg[2] //reg[4] = reg[3]
+
+sort2:  reg[2] = reg[3] //reg[3] = reg[2]
+
+sort3:  reg[3] = reg[4] //reg[2] = reg[1]
+
+sort4:  reg[4] = reg[5] //reg[1] = reg[5]
+
+mul1:   reg[10] = reg[1] * reg[6]
+
+sub1:   reg[0] = reg[0] - reg[10]
+    		if (overflow) goto eidle
+
+mul2:   reg[10] = reg[2] * reg[7]
+
+add1:   reg[0] = reg[0] + reg[10]
+    		if (overflow) goto eidle
+
+mul3:   reg[10] = reg[3] * reg[8]
+
+sub2:   reg[0] = reg[0] - reg[10]
+    		if (overflow) goto eidle
+
+mul4:   reg[10] = reg[4] * reg[9]
+
+add2:   reg[0] = reg[0] + reg[10]
+    		if (overflow) goto eidle
+    		else goto idle
+
+eidle:  err = 1
+    		if(data_ready = 1) goto store
+    		if(data_ready = 0) goto eidle
