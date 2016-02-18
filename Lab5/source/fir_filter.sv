@@ -27,8 +27,6 @@ module fir_filter
 	reg [3:0] src1;
 	reg [3:0] src2;
 	reg [3:0] dest;
-	reg [15:0] ext_data1;
-	reg [15:0] ext_data2;
 	reg [16:0] outreg_data;
 	reg clear;
 
@@ -88,8 +86,8 @@ module fir_filter
 		.src1(src1),
 		.src2(src2),
 		.dest(dest),
-		.ext_data1(ext_data1),
-		.ext_data2(ext_data2),
+		.ext_data1(sample_data),
+		.ext_data2(fir_coefficient),
 		.outreg_data(outreg_data),
 		.overflow(overflow)
 	);
