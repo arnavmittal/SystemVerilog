@@ -95,7 +95,7 @@ module controller
 			begin
 				cnt_up = 1'b1;
 				clear = 1'b0;
-				op = 3'b001;
+				op = 3'b101;
 				src1 = 4'b0000;
 				src2 = 4'b0000;
 				dest = 4'b0000;
