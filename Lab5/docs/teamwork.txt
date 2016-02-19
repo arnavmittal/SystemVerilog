@@ -1,0 +1,24 @@
+1.   Arnav Mittal
+	5
+	5
+	5
+	5
+	4 
+
+     Sam Sowell
+	4
+	5
+	5
+	5
+	3
+
+2.    Arnav - helped in figuring out the state transition diagram for the 4 bit fir filter. Helped in debugging the fir_filter.
+      Sam - helped in figuring out the state diagram for the 4 bit fir filter. 
+ 
+3.    We met 3 times and worked on the lab.
+
+4.    I helped in resolving errors in state diagram for 4 bit filter by notifying of modwait to be an output from a flip flop. I helped in debugging the code for the ZERO stae. I helped in explaining the controller block functionality.
+
+5.    Sam helped in correcting me for the logic of next_modwait and curr_modwait for the modwait signal in 4 bit fir filter.
+
+6.    I did not use any testbench from piazza. I added more testcases and debugging statements for printing to point me towards the source of the error.

@@ -1,0 +1,18 @@
+Question:
+What is the minimum amount of time that data_ready must remain asserted to ensure correct operation? 
+2 clock cycles
+
+What is the minimum amount of time, in clock cycles, that data must remain valid after data_ready is asserted in order to ensure correct operation? 
+2 clock cycles
+
+How are the image files different? Does this make sense given the filter design built in the lab? Why or why not?
+The image files are clearer. filter3 is the most clear file, filter1 is the least clear file. Assuming we made a high pass filter this makes sense.
+
+What is the general syntax for each of the file IO functions used in the provided test bench (tb_fir_filter_image.sv)?
+$fopen(FILENAME, mode)
+$fclose(Var) where Variable is the value of $fopen(FILENAME, mode)
+$fscanf(Var,"%c" , Store_Variable);
+
+What are the different format specifiers available for use in file functions like $fscanf(...)?
+fscanf has %c
+fopen has %rb
