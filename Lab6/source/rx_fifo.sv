@@ -5,6 +5,7 @@
 // Lab Section: 337-05
 // Version:     1.0  Initial Design Entry
 // Description: This is the Recieve Module of the FIFO for the USB Lab.
+
 module rx_fifo
 (
 	input wire clk,
@@ -17,7 +18,7 @@ module rx_fifo
 	output wire full
 );	
 
-	fifo
+	fifo FIFO_CALL
 	(
 		.r_clk(clk),
 		.w_clk(clk),

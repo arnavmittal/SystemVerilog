@@ -145,3 +145,39 @@ vlog -reportprogress 300 -work work /home/ecegrid/a/mg150/ece337/Lab6/source/rx_
 # 	rx_fifo
 # End time: 11:55:12 on Feb 24,2016, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
+vlog -reportprogress 300 -work work /home/ecegrid/a/mg150/ece337/Lab6/source/decode.sv
+# QuestaSim-64 vlog 10.3b Compiler 2014.05 May 29 2014
+# Start time: 12:41:27 on Feb 24,2016
+# vlog -reportprogress 300 -work work /home/ecegrid/a/mg150/ece337/Lab6/source/decode.sv 
+# -- Compiling module decode
+# ** Error: (vlog-12003) /home/ecegrid/a/mg150/ece337/Lab6/source/decode.sv(68): Variable 'curr_d_edge' written by continuous and procedural assignments. See /home/ecegrid/a/mg150/ece337/Lab6/source/decode.sv(31). 
+# End time: 12:41:27 on Feb 24,2016, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+vlog -reportprogress 300 -work work /home/ecegrid/a/mg150/ece337/Lab6/source/tb_decode.sv
+# QuestaSim-64 vlog 10.3b Compiler 2014.05 May 29 2014
+# Start time: 12:41:33 on Feb 24,2016
+# vlog -reportprogress 300 -work work /home/ecegrid/a/mg150/ece337/Lab6/source/tb_decode.sv 
+# -- Compiling module tb_decode
+# 
+# Top level modules:
+# 	tb_decode
+# End time: 12:41:33 on Feb 24,2016, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vlog -reportprogress 300 -work work /home/ecegrid/a/mg150/ece337/Lab6/source/decode.sv
+# QuestaSim-64 vlog 10.3b Compiler 2014.05 May 29 2014
+# Start time: 12:41:35 on Feb 24,2016
+# vlog -reportprogress 300 -work work /home/ecegrid/a/mg150/ece337/Lab6/source/decode.sv 
+# -- Compiling module decode
+# ** Error: (vlog-12003) /home/ecegrid/a/mg150/ece337/Lab6/source/decode.sv(68): Variable 'curr_d_edge' written by continuous and procedural assignments. See /home/ecegrid/a/mg150/ece337/Lab6/source/decode.sv(31). 
+# End time: 12:41:35 on Feb 24,2016, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+vlog -reportprogress 300 -work work /home/ecegrid/a/mg150/ece337/Lab6/source/decode.sv
+# QuestaSim-64 vlog 10.3b Compiler 2014.05 May 29 2014
+# Start time: 12:43:01 on Feb 24,2016
+# vlog -reportprogress 300 -work work /home/ecegrid/a/mg150/ece337/Lab6/source/decode.sv 
+# -- Compiling module decode
+# 
+# Top level modules:
+# 	decode
+# End time: 12:43:02 on Feb 24,2016, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
