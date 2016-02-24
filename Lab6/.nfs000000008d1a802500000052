@@ -1,0 +1,147 @@
+# //  Questa Sim-64
+# //  Version 10.3b linux_x86_64 May 29 2014
+# //
+# //  Copyright 1991-2014 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  THIS WORK CONTAINS TRADE SECRET AND PROPRIETARY INFORMATION
+# //  WHICH IS THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS
+# //  LICENSORS AND IS SUBJECT TO LICENSE TERMS.
+# //
+vlog -reportprogress 300 -work work /home/ecegrid/a/mg150/ece337/Lab6/source/edge_detect.sv
+# QuestaSim-64 vlog 10.3b Compiler 2014.05 May 29 2014
+# Start time: 10:46:34 on Feb 24,2016
+# vlog -reportprogress 300 -work work /home/ecegrid/a/mg150/ece337/Lab6/source/edge_detect.sv 
+# ** Error: (vlog-19) Failed to access library './work' at "./work".
+# No such file or directory. (errno = ENOENT)
+# End time: 10:46:34 on Feb 24,2016, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+vlib work
+vlog -reportprogress 300 -work work /home/ecegrid/a/mg150/ece337/Lab6/source/edge_detect.sv
+# QuestaSim-64 vlog 10.3b Compiler 2014.05 May 29 2014
+# Start time: 10:46:49 on Feb 24,2016
+# vlog -reportprogress 300 -work work /home/ecegrid/a/mg150/ece337/Lab6/source/edge_detect.sv 
+# -- Compiling module edge_detect
+# 
+# Top level modules:
+# 	edge_detect
+# End time: 10:46:50 on Feb 24,2016, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+vlog -reportprogress 300 -work work /home/ecegrid/a/mg150/ece337/Lab6/source/tb_edge_detect.sv
+# QuestaSim-64 vlog 10.3b Compiler 2014.05 May 29 2014
+# Start time: 10:48:14 on Feb 24,2016
+# vlog -reportprogress 300 -work work /home/ecegrid/a/mg150/ece337/Lab6/source/tb_edge_detect.sv 
+# -- Compiling module tb_edge_detect
+# ** Error: /home/ecegrid/a/mg150/ece337/Lab6/source/tb_edge_detect.sv(112): near "endmodule": syntax error, unexpected endmodule
+# End time: 10:48:14 on Feb 24,2016, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+vlog -reportprogress 300 -work work /home/ecegrid/a/mg150/ece337/Lab6/source/tb_edge_detect.sv
+# QuestaSim-64 vlog 10.3b Compiler 2014.05 May 29 2014
+# Start time: 10:50:06 on Feb 24,2016
+# vlog -reportprogress 300 -work work /home/ecegrid/a/mg150/ece337/Lab6/source/tb_edge_detect.sv 
+# -- Compiling module tb_edge_detect
+# ** Error: /home/ecegrid/a/mg150/ece337/Lab6/source/tb_edge_detect.sv(15): near "localparam": syntax error, unexpected localparam, expecting ';'
+# End time: 10:50:06 on Feb 24,2016, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# /package/eda/mg/questa10.3b/questasim/linux_x86_64/vlog failed.
+vlog -reportprogress 300 -work work /home/ecegrid/a/mg150/ece337/Lab6/source/tb_edge_detect.sv
+# QuestaSim-64 vlog 10.3b Compiler 2014.05 May 29 2014
+# Start time: 10:51:40 on Feb 24,2016
+# vlog -reportprogress 300 -work work /home/ecegrid/a/mg150/ece337/Lab6/source/tb_edge_detect.sv 
+# -- Compiling module tb_edge_detect
+# ** Error: /home/ecegrid/a/mg150/ece337/Lab6/source/tb_edge_detect.sv(112): near "endmodule": syntax error, unexpected endmodule
+# End time: 10:51:40 on Feb 24,2016, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+vlog -reportprogress 300 -work work /home/ecegrid/a/mg150/ece337/Lab6/source/tb_edge_detect.sv
+# QuestaSim-64 vlog 10.3b Compiler 2014.05 May 29 2014
+# Start time: 10:51:58 on Feb 24,2016
+# vlog -reportprogress 300 -work work /home/ecegrid/a/mg150/ece337/Lab6/source/tb_edge_detect.sv 
+# -- Compiling module tb_edge_detect
+# 
+# Top level modules:
+# 	tb_edge_detect
+# End time: 10:51:59 on Feb 24,2016, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+vlog -reportprogress 300 -work work /home/ecegrid/a/mg150/ece337/Lab6/source/tb_eop_detect.sv
+# QuestaSim-64 vlog 10.3b Compiler 2014.05 May 29 2014
+# Start time: 11:00:10 on Feb 24,2016
+# vlog -reportprogress 300 -work work /home/ecegrid/a/mg150/ece337/Lab6/source/tb_eop_detect.sv 
+# -- Compiling module tb_eop_detect
+# 
+# Top level modules:
+# 	tb_eop_detect
+# End time: 11:00:10 on Feb 24,2016, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vlog -reportprogress 300 -work work /home/ecegrid/a/mg150/ece337/Lab6/source/eop_detect.sv
+# QuestaSim-64 vlog 10.3b Compiler 2014.05 May 29 2014
+# Start time: 11:00:13 on Feb 24,2016
+# vlog -reportprogress 300 -work work /home/ecegrid/a/mg150/ece337/Lab6/source/eop_detect.sv 
+# -- Compiling module eop_detect
+# ** Error: /home/ecegrid/a/mg150/ece337/Lab6/source/eop_detect.sv(15): near "~&": syntax error, unexpected ~&, expecting ';' or ','
+# End time: 11:00:13 on Feb 24,2016, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+vlog -reportprogress 300 -work work /home/ecegrid/a/mg150/ece337/Lab6/source/eop_detect.sv
+# QuestaSim-64 vlog 10.3b Compiler 2014.05 May 29 2014
+# Start time: 11:01:52 on Feb 24,2016
+# vlog -reportprogress 300 -work work /home/ecegrid/a/mg150/ece337/Lab6/source/eop_detect.sv 
+# -- Compiling module eop_detect
+# ** Error: /home/ecegrid/a/mg150/ece337/Lab6/source/eop_detect.sv(17): (vlog-2110) Illegal reference to net "eop".
+# End time: 11:01:53 on Feb 24,2016, Elapsed time: 0:00:01
+# Errors: 1, Warnings: 0
+vlog -reportprogress 300 -work work /home/ecegrid/a/mg150/ece337/Lab6/source/eop_detect.sv
+# QuestaSim-64 vlog 10.3b Compiler 2014.05 May 29 2014
+# Start time: 11:02:17 on Feb 24,2016
+# vlog -reportprogress 300 -work work /home/ecegrid/a/mg150/ece337/Lab6/source/eop_detect.sv 
+# -- Compiling module eop_detect
+# 
+# Top level modules:
+# 	eop_detect
+# End time: 11:02:18 on Feb 24,2016, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+vlog -reportprogress 300 -work work /home/ecegrid/a/mg150/ece337/Lab6/source/tb_edge_detect.sv
+# QuestaSim-64 vlog 10.3b Compiler 2014.05 May 29 2014
+# Start time: 11:19:07 on Feb 24,2016
+# vlog -reportprogress 300 -work work /home/ecegrid/a/mg150/ece337/Lab6/source/tb_edge_detect.sv 
+# -- Compiling module tb_edge_detect
+# 
+# Top level modules:
+# 	tb_edge_detect
+# End time: 11:19:08 on Feb 24,2016, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+vlog -reportprogress 300 -work work /home/ecegrid/a/mg150/ece337/Lab6/source/tb_edge_detect.sv
+# QuestaSim-64 vlog 10.3b Compiler 2014.05 May 29 2014
+# Start time: 11:19:09 on Feb 24,2016
+# vlog -reportprogress 300 -work work /home/ecegrid/a/mg150/ece337/Lab6/source/tb_edge_detect.sv 
+# -- Compiling module tb_edge_detect
+# 
+# Top level modules:
+# 	tb_edge_detect
+# End time: 11:19:10 on Feb 24,2016, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+vlog -reportprogress 300 -work work /home/ecegrid/a/mg150/ece337/Lab6/source/rx_fifo.sv
+# QuestaSim-64 vlog 10.3b Compiler 2014.05 May 29 2014
+# Start time: 11:54:41 on Feb 24,2016
+# vlog -reportprogress 300 -work work /home/ecegrid/a/mg150/ece337/Lab6/source/rx_fifo.sv 
+# -- Compiling module rx_fifo
+# ** Error: /home/ecegrid/a/mg150/ece337/Lab6/source/rx_fifo.sv(11): near "input": syntax error, unexpected input, expecting ')'
+# End time: 11:54:41 on Feb 24,2016, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+vlog -reportprogress 300 -work work /home/ecegrid/a/mg150/ece337/Lab6/source/rx_fifo.sv
+# QuestaSim-64 vlog 10.3b Compiler 2014.05 May 29 2014
+# Start time: 11:55:00 on Feb 24,2016
+# vlog -reportprogress 300 -work work /home/ecegrid/a/mg150/ece337/Lab6/source/rx_fifo.sv 
+# -- Compiling module rx_fifo
+# ** Error: /home/ecegrid/a/mg150/ece337/Lab6/source/rx_fifo.sv(11): (vlog-2388) 'clk' already declared in this scope (rx_fifo).
+# ** Error: /home/ecegrid/a/mg150/ece337/Lab6/source/rx_fifo.sv(11): Verilog Compiler exiting
+# End time: 11:55:00 on Feb 24,2016, Elapsed time: 0:00:00
+# Errors: 2, Warnings: 0
+vlog -reportprogress 300 -work work /home/ecegrid/a/mg150/ece337/Lab6/source/rx_fifo.sv
+# QuestaSim-64 vlog 10.3b Compiler 2014.05 May 29 2014
+# Start time: 11:55:11 on Feb 24,2016
+# vlog -reportprogress 300 -work work /home/ecegrid/a/mg150/ece337/Lab6/source/rx_fifo.sv 
+# -- Compiling module rx_fifo
+# 
+# Top level modules:
+# 	rx_fifo
+# End time: 11:55:12 on Feb 24,2016, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
