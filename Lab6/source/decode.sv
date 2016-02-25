@@ -52,7 +52,6 @@ module decode
 		begin
 			next_d_plus = 1'b1;
 		end
-		//ASK IF I NEED AN ELSE CONDITION HERE AND IF YES WHAT??
 		
 		mid = curr_d_plus ~^ d_plus;
 

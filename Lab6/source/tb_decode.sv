@@ -14,10 +14,10 @@ module tb_decode ();
 	localparam	CHECK_DELAY 	= 1; // Check 1ns after the rising edge to allow for propagation delay
 
 	reg tb_clk;
-	reg tb_rst;
+	reg tb_n_rst;
 	reg tb_d_plus;
 	reg tb_shift_enable;
-	reg tb_eop;	
+	reg tb_eop;
 	reg tb_d_orig;
 
 	decode DUT
@@ -26,8 +26,7 @@ module tb_decode ();
 		.n_rst(tb_n_rst),
 		.d_plus(tb_d_plus),
 		.shift_enable(tb_shift_enable),
-		.rollover_val(tb_rollover_val),
-		.count_eop(tb_eop),
+		.eop(tb_eop),
 		.d_orig(tb_d_orig)
 	);
 	
@@ -38,230 +37,84 @@ module tb_decode ();
 		#(CLK_PERIOD/2.0);
 		tb_clk = 1'b1;
 		#(CLK_PERIOD/2.0);
-	end
-	
+	end	
 	initial
 	begin
-		//////////////////////////////////////////////////////TESTCASE 1 RESET CASE
-		@(posedge tb_clk);
-		tb_clear = 1'b0;
-		tb_count_enable=1'b0;
-		tb_rollover_val= 1;
-		tb_n_rst=1'b1;
-		@(posedge tb_clk);
-		tb_clear = 1'b1;
-		@(posedge tb_clk);
-		tb_clear = 1'b0;
-		@(posedge tb_clk);
-
-		if((tb_rollover_flag == 0))
-			$info("TESTCASE 1 ssdsdsPASSED");
-		else
-			$info("--------------------sadsadad-------------------TESTCASE 1 FAILED");
+		/////////////////////////////////////////////////////////////////////////////////////////////RESET CASE START
+		@(negedge tb_clk);
+		tb_shift_enable=1'b0;
+		tb_eop =1'b0;
+		tb_d_plus=1'b0;
+		tb_n_rst = 1'b1;
+		@(negedge tb_clk);
 		
+		tb_n_rst = 1'b0;
+		@(negedge tb_clk);
 
-		if((tb_count_out == 0))
-			$info("TESTCASE 1 xasdadasdasPASSED");
-		else
-			$info("-------------------dsfsddad--------------------TESTCASE 1 FAILED");
-
-		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////TESTCASE 2 RESET CASE
-		@(posedge tb_clk);
-		@(posedge tb_clk);
-		@(posedge tb_clk);
-		@(posedge tb_clk);
-		@(posedge tb_clk);
-		tb_n_rst = 1'b1;	
-		@(posedge tb_clk);
-		tb_n_rst = 1'b0; 	// Need to actually toggle this in order for it to actually run dependent always blocks
-		@(posedge tb_clk);
-		tb_n_rst = 1'b1; 	// Deactivate the chip reset
-		@(posedge tb_clk);
-
-		if((tb_rollover_flag == 0))
-			$info("TESTCASE 1 ssddwdwdsdsPASSED");
-		else
-			$info("--------------------sadswdwdwdadad-------------------TESTCASE 1 FAILED");
+		tb_n_rst = 1'b1;
+		@(negedge tb_clk);
 		
-
-		if((tb_count_out == 0))
-			$info("TESTCASE 1 xasdwwdwdadasdasPASSED");
+		if((tb_d_orig == '1))
+			$info("-------------------TESTCASE 1 passed");
 		else
-			$info("-----------------wdwwd--dsfsddad--------------------TESTCASE 1 FAILED");
+			$info("-------------------TESTCASE 1 failed");
 		
-		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////TESTCASE 3 CLEAR CASE
-		@(posedge tb_clk);
-		tb_clear = 1'b0;
-		@(posedge tb_clk);
-		tb_clear = 1'b1;
-		@(posedge tb_clk);
-		tb_clear = 1'b0;
-		@(posedge tb_clk);
-
-		if((tb_rollover_flag == 0))
-			$info("TESTsdsdaCASE 1 ssdsdsPASSED");
+		if((tb_d_plus == '1))
+			$info("-------------------TESTCASE 2 passed");
 		else
-			$info("--------------------sadsdsadsadad-------------------TESTCASE 1 FAILED");
+			$info("-------------------TESTCASE 2 failed");
+
+		@(negedge tb_clk);
+		@(negedge tb_clk);
+		/////////////////////////////////////////////////////////////////////////////////////////////RESET CASE END
+		//----------------------------------------------------------------//
+		tb_d_plus=1'b1;
+		@(negedge tb_clk);
 		
+		tb_d_plus=1'b0;
+		@(negedge tb_clk);
 
-		if((tb_count_out == 0))
-			$info("TESTCASE 1 xasdadasdasPASSED");
+		if((tb_d_orig == '1))
+			$info("-------------------TESTCASE 3 passed");
 		else
-			$info("--------sdsdsd-----------dsfsddad--------------------TESTCASE 1 FAILED");
-
-		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////TESTCASE 4 COUNT_OUT = ROLLOVER and ROLLOVER_FLAG = 1
-		@(posedge tb_clk);
-		tb_rollover_val = 3;
-		tb_count_enable = 1'b0;
-		@(posedge tb_clk);
-		tb_count_enable = 1'b1;
-		@(posedge tb_clk);
-		@(posedge tb_clk);
-		@(posedge tb_clk);
-		tb_count_enable = 1'b0;
-		@(posedge tb_clk);
-
-		if((tb_rollover_flag == 0))
-			$info("TESTCASdsfdsE 1 ssdsdsPASSED");
-		else
-			$info("--------------------sadsadad--sdfsdfd-----------------TESTCASE 1 FAILED");
+			$info("-------------------TESTCASE 3 failed");
+		@(negedge tb_clk);
+		@(negedge tb_clk);
+		//----------------------------------------------------------------//
+		tb_shift_enable=1'b1;
+		@(negedge tb_clk);
 		
-
-		if((tb_count_out == 0))
-			$info("TESTCASE 1 xasdadssfsddasdasPASSED");
+		if((tb_d_orig == '1))
+			$info("-------------------TESTCASE 4 passed");
 		else
-			$info("-------------------dsfsddad----------sdfdss----------TESTCASE 1 FAILED");
+			$info("-------------------TESTCASE 4 failed");
+		@(negedge tb_clk);
+		@(negedge tb_clk);
+		//----------------------------------------------------------------//
+		tb_d_plus=1'b1;
+		@(negedge tb_clk);
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////TESTCASE 5 CLEAR CASE
-		@(posedge tb_clk);
-		tb_clear = 1'b0;
-		@(posedge tb_clk);
-		tb_clear = 1'b1;
-		@(posedge tb_clk);
-		tb_clear = 1'b0;
-		@(posedge tb_clk);
-
-		if((tb_rollover_flag == 0))
-			$info("TESTCASE 1 ssdsdsPASSED");
+		if((tb_d_orig == '0))
+			$info("-------------------TESTCASE 5 passed");
 		else
-			$info("--------------------sadsadad-------fsfsdfdf------------TESTCASE 1 FAILED");
+			$info("-------------------TESTCASE 5 failed");
+		//----------------------------------------------------------------//
+		tb_shift_enable=1'b1;
+		tb_eop=1'b1;
+		@(negedge tb_clk);
 		
-
-		if((tb_count_out == 0))
-			$info("TESTCASE 1 xasdadasdasPASSED");
+		if((tb_d_orig == '1))
+			$info("-------------------TESTCASE 6 passed");
 		else
-			$info("-------------------dsfsddad-----dsfsdsddsfs---------------TESTCASE 1 FAILED");
-		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////TESTCASE 6 COUNT_OUT = 1 and ROLLOVER_FLAG = 0
-		@(posedge tb_clk);
-		tb_rollover_val = 5;
-		tb_count_enable = 1'b0;
-		@(posedge tb_clk);
-		tb_count_enable = 1'b1;
-		@(posedge tb_clk);
-		@(posedge tb_clk);
-		@(posedge tb_clk);
-		@(posedge tb_clk);
-		@(posedge tb_clk);
-		tb_count_enable = 1'b0;
-		@(posedge tb_clk);
-		@(posedge tb_clk);		
-		@(posedge tb_clk);
-		if((tb_rollover_flag == 0))
-			$info("TESTCAdfdfSE 1 ssdsdsPASSED");
-		else
-			$info("----------------dfdfdsf----saddffdsadad-------------------TESTCASE 1 FAILED");
-		
-
-		if((tb_count_out == 0))
-			$info("TESTCASE 1 xadfdfsdadasdasPASSED");
-		else
-			$info("--------------dfdfdfd-----dsfsddad--------------------TESTCASE 1 FAILED");
-
-		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////TESTCASE ACTUAL TIMING CHART		
-		@(posedge tb_clk);
-		@(posedge tb_clk);
-		@(posedge tb_clk);
-		@(posedge tb_clk);
-		@(posedge tb_clk);
-		@(negedge tb_clk);
-			
-		tb_rollover_val = 2;
-		tb_n_rst = 1'b1;	
-		@(posedge tb_clk);
-		tb_n_rst = 1'b0; 	// Need to actually toggle this in order for it to actually run dependent always blocks
-		@(posedge tb_clk);
-		@(negedge tb_clk);
-		tb_n_rst = 1'b1; 	// Deactivate the chip reset
-		@(negedge tb_clk);
-		tb_count_enable = 1'b1;		
-		@(negedge tb_clk);
-		tb_clear = 1'b1;
-		@(negedge tb_clk);
-		tb_clear = 1'b0;
-		@(posedge tb_clk);
-		@(posedge tb_clk);
-		@(posedge tb_clk);
-		@(negedge tb_clk);
-		tb_count_enable = 1'b0;
+			$info("-------------------TESTCASE 6 failed");
 		@(negedge tb_clk);
 		@(negedge tb_clk);
-		tb_clear = 1'b1;
-		if((tb_rollover_flag == 0))
-			$info("TESTCASE 1 ssdsdsPASSED");
-		else
-			$info("-----sdsdsds---------------sadsadad-------------------TESTCASE 1 FAILED");
-		
-
-		if((tb_count_out == 0))
-			$info("TESTCASE 1 xasdadasdasPASSED");
-		else
-			$info("------------sdsdsds-------dsfsddad--------------------TESTCASE 1 FAILED");
-		
-		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////TESTCASE ACTUAL TIMING CHART		
-		@(posedge tb_clk);
-		@(posedge tb_clk);
-		@(posedge tb_clk);
-		@(posedge tb_clk);
-		@(posedge tb_clk);
-		@(negedge tb_clk);
-			
-		tb_rollover_val = 10;
-		tb_n_rst = 1'b1;	
-		@(posedge tb_clk);
-		tb_n_rst = 1'b0; 	// Need to actually toggle this in order for it to actually run dependent always blocks
-		@(posedge tb_clk);
-		@(negedge tb_clk);
-		tb_n_rst = 1'b1; 	// Deactivate the chip reset
-		@(negedge tb_clk);
-		tb_count_enable = 1'b1;		
-		@(negedge tb_clk);
-		tb_clear = 1'b1;
-		@(negedge tb_clk);
-		tb_clear = 1'b0;
-		@(posedge tb_clk);
-		@(posedge tb_clk);
-		@(posedge tb_clk);
-		@(posedge tb_clk);
-		@(posedge tb_clk);
-		@(negedge tb_clk);
-		tb_count_enable = 1'b0;
-		@(negedge tb_clk);
-		@(negedge tb_clk);
-		tb_clear = 1'b1;
-		if((tb_rollover_flag == 0))
-			$info("TESTCASE 1 ssdsdsPASSED");
-		else
-			$info("-----sdsdsds---------------sadsadad-------------------TESTCASE 1 FAILED");
-		
-
-		if((tb_count_out == 0))
-			$info("TESTCASE 1 xasdadasdasPASSED");
-		else
-			$info("------------sdsdsds-------dsfsddad--------------------TESTCASE 1 FAILED");
+		//----------------------------------------------------------------//
 		
 	end
 endmodule
-/*module tb_decode	();
+/*
+module tb_decode	();
 
 	//	Default Config Test Variables and Constants
 	localparam SIZE = 4;
