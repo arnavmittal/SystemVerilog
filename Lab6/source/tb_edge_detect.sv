@@ -11,7 +11,7 @@
 
 `timescale 1ns / 100ps
 
-module tb_rx_fifo ();
+module tb_edge_detect ();
 
 	localparam	CLK_PERIOD	= 10.4;
 	localparam	CHECK_DELAY 	= 1; // Check 1ns after the rising edge to allow for propagation delay
@@ -41,7 +41,7 @@ module tb_rx_fifo ();
 	begin
 		/////////////////////////////////////////////////////////////////////////////////////////////RESET CASE START
 		@(negedge tb_clk);
-
+		tb_d_plus = 1'b1;
 		tb_n_rst = 1'b1;
 		@(negedge tb_clk);
 		
@@ -65,7 +65,7 @@ module tb_rx_fifo ();
 		@(negedge tb_clk);
 		/////////////////////////////////////////////////////////////////////////////////////////////RESET CASE END
 		//----------------------------------------------------------------//
-		tb_d_plus='0;
+		tb_d_plus = 1'b0;
 		@(negedge tb_clk);
 		
 		if((tb_d_edge == '1))
@@ -73,7 +73,7 @@ module tb_rx_fifo ();
 		else
 			$info("-------------------TESTCASE 3 failed");
 
-		tb_d_plus='1;
+		tb_d_plus=1'b1;
 		@(negedge tb_clk);
 		
 		if((tb_d_edge == '1))
