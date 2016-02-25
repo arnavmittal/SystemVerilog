@@ -40,7 +40,7 @@ module decode
 	always_comb
 	begin
 		ena = {shift_enable,eop};
-		if (ena == 2'b00)
+		if (ena == 2'b00 | ena == 2'b01)
 		begin
 			next_d_plus = curr_d_plus;
 		end
@@ -55,13 +55,13 @@ module decode
 		
 		mid = curr_d_plus ~^ d_plus;
 
-		if (ena == 2'b00)
+		if (ena == 2'b11)
 		begin
-			next_d_orig = mid;
+			next_d_orig = 1'b1;
 		end
 		else
 		begin
-			next_d_orig = 1'b1;
+			next_d_orig = mid;
 		end
 	end
 	assign d_orig = curr_d_orig; 

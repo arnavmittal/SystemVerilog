@@ -187,7 +187,20 @@ module tb_rx_fifo ();
 				break;
 			end				
 		end
-
+		
+		@(negedge tb_clk);
+		@(negedge tb_clk);
+		tb_w_enable=1'b0;		
+		for(i=0;i<2000000;i++)
+		begin
+			@(negedge tb_clk);
+			tb_r_enable=1'b1;
+			if (tb_empty == 1'b1)
+			begin
+				break;
+			end				
+		end
+		
 		/////////////////////////////////////////////////////////////////////////////////////////////RESET CASE START
 		@(negedge tb_clk);
 
@@ -197,9 +210,6 @@ module tb_rx_fifo ();
 		tb_w_data = 8'd0;
 		@(negedge tb_clk);
 		@(negedge tb_clk);
-		@(negedge tb_clk);
-		
-		tb_n_rst = 1'b0;
 		@(negedge tb_clk);
 		
 		tb_n_rst = 1'b1;

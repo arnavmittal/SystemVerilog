@@ -73,6 +73,16 @@ module tb_decode ();
 		@(negedge tb_clk);
 		//----------------------------------------------------------------//
 		tb_shift_enable=1'b1;
+		tb_eop=1'b1;
+		@(negedge tb_clk);
+		
+		if((tb_d_orig == '1))
+			$info("-------------------TESTCASE 6 passed");
+		else
+			$info("-------------------TESTCASE 6 failed");
+		@(negedge tb_clk);
+		//----------------------------------------------------------------//
+		tb_shift_enable=1'b1;
 		@(negedge tb_clk);
 		
 		if((tb_d_orig == '1))
@@ -89,16 +99,6 @@ module tb_decode ();
 			$info("-------------------TESTCASE 5 passed");
 		else
 			$info("-------------------TESTCASE 5 failed");
-		//----------------------------------------------------------------//
-		tb_shift_enable=1'b1;
-		tb_eop=1'b1;
-		@(negedge tb_clk);
-		
-		if((tb_d_orig == '1))
-			$info("-------------------TESTCASE 6 passed");
-		else
-			$info("-------------------TESTCASE 6 failed");
-		@(negedge tb_clk);
 		//----------------------------------------------------------------//
 		tb_eop=1'b0;
 		@(negedge tb_clk);
