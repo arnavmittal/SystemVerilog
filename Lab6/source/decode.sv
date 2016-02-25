@@ -19,7 +19,7 @@ module decode
 	reg next_d_plus;
 	reg curr_d_orig;
 	reg next_d_orig;
-	reg ena = {shift_enable,eop};
+	reg [1:0] ena;
 	reg mid;
 
 	
@@ -28,7 +28,7 @@ module decode
 		if (n_rst == 1'b0) //RESET == 0
 		begin
 			curr_d_plus <= 1'b1;
-			curr_d_orig <= '1; 
+			curr_d_orig <= 1'b1; 
 		end
 		else //RESET == 1
 		begin
@@ -39,6 +39,7 @@ module decode
 	
 	always_comb
 	begin
+		ena = {shift_enable,eop};
 		if (ena == 2'b00)
 		begin
 			next_d_plus = curr_d_plus;
@@ -64,6 +65,5 @@ module decode
 			next_d_orig = 1'b1;
 		end
 	end
-	
 	assign d_orig = curr_d_orig; 
 endmodule 
