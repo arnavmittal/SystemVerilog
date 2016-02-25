@@ -1,0 +1,42 @@
+# //  Questa Sim-64
+# //  Version 10.3b linux_x86_64 May 29 2014
+# //
+# //  Copyright 1991-2014 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  THIS WORK CONTAINS TRADE SECRET AND PROPRIETARY INFORMATION
+# //  WHICH IS THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS
+# //  LICENSORS AND IS SUBJECT TO LICENSE TERMS.
+# //
+# vsim -Lf /home/ecegrid/a/ece337/Class0.5u/ECE337_IP/vsim -L /home/ecegrid/a/ece337/Course_Prod/Cell_Libs/AMI_05/vhdl_work "+no_glitch_msg" -coverage -voptargs="+acc" -i -t ps source_work/.tb_decode 
+# Start time: 12:04:08 on Feb 25,2016
+# ** Note: (vsim-3812) Design is being optimized...
+# Loading sv_std.std
+# Loading work.tb_decode(fast)
+# Loading work.decode(fast)
+add wave *
+# ** Error: Unable to lock WLF file "vsim.wlf". Retrying 1 times, errno 11
+# ** Error: Unable to lock WLF file "vsim.wlf". Retrying 2 times, errno 11
+# ** Error: Unable to lock WLF file "vsim.wlf". Retrying 3 times, errno 11
+# ** Error: Cannot lock WLF file: "vsim.wlf"
+#           errno 11: Resource temporarily unavailable.
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: mg150  Hostname: ee215lnx11.ecn.purdue.edu  ProcessID: 32048
+#           Attempting to use alternate WLF file "./wlftFJTBVH".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlftFJTBVH
+run 400 ns
+# ** Info: -------------------TESTCASE 1 failed
+#    Time: 41600 ps  Scope: tb_decode File: source/tb_decode.sv Line: 60
+# ** Info: -------------------TESTCASE 2 failed
+#    Time: 41600 ps  Scope: tb_decode File: source/tb_decode.sv Line: 65
+# ** Info: -------------------TESTCASE 3 failed
+#    Time: 83200 ps  Scope: tb_decode File: source/tb_decode.sv Line: 80
+# ** Info: -------------------TESTCASE 4 passed
+#    Time: 114400 ps  Scope: tb_decode File: source/tb_decode.sv Line: 88
+# ** Info: -------------------TESTCASE 5 failed
+#    Time: 145600 ps  Scope: tb_decode File: source/tb_decode.sv Line: 100
+# ** Info: -------------------TESTCASE 6 passed
+#    Time: 156 ns  Scope: tb_decode File: source/tb_decode.sv Line: 107
+# End time: 12:08:48 on Feb 25,2016, Elapsed time: 0:04:40
+# Errors: 4, Warnings: 2

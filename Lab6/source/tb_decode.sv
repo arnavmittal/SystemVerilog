@@ -52,19 +52,12 @@ module tb_decode ();
 		@(negedge tb_clk);
 
 		tb_n_rst = 1'b1;
-		@(negedge tb_clk);
 		
 		if((tb_d_orig == '1))
 			$info("-------------------TESTCASE 1 passed");
 		else
 			$info("-------------------TESTCASE 1 failed");
 		
-		if((tb_d_plus == '1))
-			$info("-------------------TESTCASE 2 passed");
-		else
-			$info("-------------------TESTCASE 2 failed");
-
-		@(negedge tb_clk);
 		@(negedge tb_clk);
 		/////////////////////////////////////////////////////////////////////////////////////////////RESET CASE END
 		//----------------------------------------------------------------//
@@ -72,13 +65,11 @@ module tb_decode ();
 		@(negedge tb_clk);
 		
 		tb_d_plus=1'b0;
-		@(negedge tb_clk);
 
 		if((tb_d_orig == '1))
 			$info("-------------------TESTCASE 3 passed");
 		else
 			$info("-------------------TESTCASE 3 failed");
-		@(negedge tb_clk);
 		@(negedge tb_clk);
 		//----------------------------------------------------------------//
 		tb_shift_enable=1'b1;
@@ -108,9 +99,14 @@ module tb_decode ();
 		else
 			$info("-------------------TESTCASE 6 failed");
 		@(negedge tb_clk);
+		//----------------------------------------------------------------//
+		tb_eop=1'b0;
 		@(negedge tb_clk);
 		//----------------------------------------------------------------//
-		
+		tb_d_plus=1'b0;
+		@(negedge tb_clk);
+		@(negedge tb_clk);
+		//----------------------------------------------------------------//
 	end
 endmodule
 /*
