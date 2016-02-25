@@ -15,13 +15,13 @@ module tb_eop_detect ();
 	localparam	CHECK_DELAY 	= 1; // Check 1ns after the rising edge to allow for propagation delay
 
 	reg tb_clk;
-	reg tb_eop;
+	reg tb_d_eop;
 	reg tb_d_minus;
 	reg tb_d_plus;
 
 	eop_detect DUT
 	(
-		.n_eop  (tb_eop),
+		.eop  (tb_d_eop),
 		.d_minus (tb_d_minus),
 		.d_plus (tb_d_plus)
 	);
@@ -36,7 +36,7 @@ module tb_eop_detect ();
 	end	
 	initial
 	begin
-		/////////////////////////////////////////////////////////////////////////////////////////////RESET CASE START
+		//----------------------------------------------------------------//
 		@(negedge tb_clk);
 		tb_d_plus = 1'b0;
 		tb_d_minus = 1'b0;
@@ -47,7 +47,7 @@ module tb_eop_detect ();
 		else
 			$info("-------------------TESTCASE 1 failed");
 		@(negedge tb_clk);
-		
+		//----------------------------------------------------------------//
 		tb_d_plus = 1'b0;
 		tb_d_minus = 1'b1;
 		@(negedge tb_clk);
@@ -57,7 +57,7 @@ module tb_eop_detect ();
 		else
 			$info("-------------------TESTCASE 2 failed");
 		@(negedge tb_clk);
-
+		//----------------------------------------------------------------//
 		tb_d_plus = 1'b1;
 		tb_d_minus = 1'b0;
 		@(negedge tb_clk);
@@ -67,7 +67,7 @@ module tb_eop_detect ();
 		else
 			$info("-------------------TESTCASE 3 failed");
 		@(negedge tb_clk);
-
+		//----------------------------------------------------------------//
 		tb_d_plus = 1'b1;
 		tb_d_minus = 1'b1;
 		@(negedge tb_clk);
@@ -77,9 +77,21 @@ module tb_eop_detect ();
 		else
 			$info("-------------------TESTCASE 4 failed");
 		@(negedge tb_clk);
+		//----------------------------------------------------------------//
+		@(negedge tb_clk);
+		tb_d_plus = 1'b0;
+		tb_d_minus = 1'b0;
+		@(negedge tb_clk);
+		
+		if((tb_d_eop == '1))
+			$info("-------------------TESTCASE 1 passed");
+		else
+			$info("-------------------TESTCASE 1 failed");
+		@(negedge tb_clk);
+		//----------------------------------------------------------------//
 	end
 endmodule
-		/////////////////////////////////////////////////////////////////////////////////////////////RESET CASE END
+		
 /*`timescale 1ns / 100ps
 
 module tb_eop_detect	();
