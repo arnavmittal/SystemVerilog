@@ -6,3 +6,23 @@
 // Version:     1.0  Initial Design Entry
 // Description: This is the module for the Shift register of the USB Receiver Lab
 //              which hold the 1 byte of data to be stored in the FIFO.
+
+module shift_register
+(
+	input wire clk,
+	input wire n_rst,
+	input wire shift_enable,
+	input wire d_orig,
+	output reg [7:0] rcv_data
+);
+	
+	flex_stp_sr #(8,0) 
+	(
+		.clk(clk),
+		.n_rst(n_rst),
+		.shift_enable(shift_enable),
+		.serial_in(d_orig),
+		.parallel_out(rcv_data)
+	);
+	
+endmodule
