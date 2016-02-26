@@ -31,9 +31,7 @@ module usb_receiver
 	reg d_orig;
 	reg [7:0] rcv_data;
 	reg r_enable;	
-	reg w_enable;	
-	reg [7:0] w_data;	
-	reg [7:0] r_data;	
+	reg w_enable;			
 	reg empty;	
 	reg full;
 
@@ -111,7 +109,7 @@ module usb_receiver
 		.n_rst(n_rst),
 		.r_enable(r_enable),
 		.w_enable(w_enable),
-		.w_data(w_data),
+		.w_data(rcv_data),
 		.r_data(r_data),
 		.empty(empty),
 		.full(full)
