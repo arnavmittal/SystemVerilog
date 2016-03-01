@@ -9,8 +9,8 @@
 
 module usb_receiver 
 (
-	input wire clk,    // Clock
-	input wire n_rst,  // Asynchronous reset active low
+	input wire clk,
+	input wire n_rst,
 	input wire d_plus,
 	input wire d_minus,
 	input wire r_enable
@@ -117,4 +117,4 @@ module usb_receiver
 
 	
 	//-----------------------------------RCU
-endmodule
+endmodule 
