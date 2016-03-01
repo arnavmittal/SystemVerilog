@@ -13,27 +13,23 @@ module usb_receiver
 	input wire n_rst,
 	input wire d_plus,
 	input wire d_minus,
-	input wire r_enable
-	output reg [7:0]r_data,
-	output reg empty,
-	output reg full,
-	output reg rcving,
-	output reg r_error
+	input wire r_enable,
+	output wire [7:0] rcv_data,
+	output wire empty,
+	output wire full,
+	output wire rcving,
+	output wire r_error
 );
 
 	reg sync_d_plus;
 	reg sync_d_minus;
 	reg eop;
 	reg d_edge;
-	reg rcving;
 	reg shift_enable;
 	reg byte_received;
 	reg d_orig;
-	reg [7:0] rcv_data;
-	reg r_enable;	
+	reg [7:0] r_data;
 	reg w_enable;			
-	reg empty;	
-	reg full;
 
 	//-----------------------------------Sync High d_plus
 	sync_high SYNC_D_PLUS

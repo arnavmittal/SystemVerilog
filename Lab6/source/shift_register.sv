@@ -16,7 +16,7 @@ module shift_register
 	output reg [7:0] rcv_data
 );
 	
-	flex_stp_sr #(8,0) 
+	flex_stp_sr #(8,0) FLEX_STR_SR 
 	(
 		.clk(clk),
 		.n_rst(n_rst),

@@ -37,7 +37,7 @@ module rcu
 
 	always_comb
 	begin
-		SYNC={7'b0,1'b1};
+		SYNC={1'b1,7'b0};
 		next_state = state; // DEFAULT CASE
 		case(state)
 			IDLE:
@@ -46,7 +46,7 @@ module rcu
 				begin
 						next_state = START;
 				end
-				else:
+				else
 				begin
 						next_state = IDLE;
 				end
@@ -57,7 +57,7 @@ module rcu
 				begin
 						next_state = CHECK;
 				end
-				else:
+				else
 				begin
 						next_state = START;
 				end
@@ -68,9 +68,9 @@ module rcu
 				begin
 						next_state = RCV_START;
 				end
-				else:
+				else
 				begin
-						next_state = ERR_EOP_1
+						next_state = ERR_EOP_1;
 				end
 			end
 			RCV_START:
@@ -83,14 +83,14 @@ module rcu
 				begin
 						next_state = EIDLE;
 				end
-				else:
+				else
 				begin
 						next_state = RCV_START;
 				end
 			end
 			RCV_DONE:
 			begin
-					next_state = EOP_1
+					next_state = EOP_1;
 			end
 			EOP_1:
 			begin
@@ -151,6 +151,6 @@ module rcu
 	end
 	//{IDLE, START, CHECK, RCV_START, RCV_DONE, EOP_1, EOP_2, ERR_EOP_1, ERR_EOP_2, EIDLE} 
 	assign rcving = (state == START) || (state == CHECK) || (state == RCV_START) || (state == RCV_DONE) || (state == EOP_1) || (state == EOP_2) || (state == ERR_EOP_1) || (state == ERR_EOP_2);
-	assign w_enable = (state == RCV_DONE)
+	assign w_enable = (state == RCV_DONE);
 	assign r_error = (state == ERR_EOP_1) || (state == ERR_EOP_2) || (state == EIDLE);
 endmodule 

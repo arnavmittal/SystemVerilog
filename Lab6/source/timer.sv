@@ -21,8 +21,7 @@ module timer
 	reg synced_enable;
 	reg clear1, count2;
 
-	flex_counter COUNT1 
-	#(4)
+	flex_counter #(4) COUNT1 
 	(
 		.clk(clk),
 		.n_rst(n_rst),
@@ -35,17 +34,17 @@ module timer
 
 	always_comb
 	begin
-			if(data_sync==4'd3)
-			begin
-				synced_enable=1'b1;
-			end
-			else
-				synced_enable=1'b0;
-			end
+		if(data_sync==4'd3)
+		begin
+			synced_enable=1'b1;
+		end
+		else
+		begin
+			synced_enable=1'b0;
+		end
 	end
 
-	flex_counter COUNT2 
-	#(4)
+	flex_counter #(4) COUNT2 
 	(
 		.clk(clk),
 		.n_rst(n_rst),
