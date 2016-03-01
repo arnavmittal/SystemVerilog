@@ -25,31 +25,20 @@ module timer
 	(
 		.clk(clk),
 		.n_rst(n_rst),
-		.clear(clear1),
-		.count_enable(d_edge),
+		.clear(d_edge),
+		.count_enable(rcving),
 		.rollover_val(4'd8),
 		.count_out(data_sync),
-		.rollover_flag(shift_enable)
 	);
 
-	always_comb
-	begin
-		if(data_sync==4'd3)
-		begin
-			synced_enable=1'b1;
-		end
-		else
-		begin
-			synced_enable=1'b0;
-		end
-	end
+assign shift_enable = (data_sync == 3);
 
 	flex_counter #(4) COUNT2 
 	(
 		.clk(clk),
 		.n_rst(n_rst),
-		.clear(clear2),
-		.count_enable(synced_enable),
+		.clear(~rcving),
+		.count_enable(shift_enable),
 		.rollover_val(4'd8),
 		.count_out(count_out2),
 		.rollover_flag(byte_received)
