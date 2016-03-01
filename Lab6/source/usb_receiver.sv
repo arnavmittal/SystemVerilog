@@ -117,4 +117,18 @@ module usb_receiver
 
 	
 	//-----------------------------------RCU
+
+	rcu RCU
+	(
+		.clk(clk),
+		.n_rst(n_rst),
+		.d_edge(d_edge),
+		.eop(eop),
+		.shift_enable(shift_enable),
+		.rcv_data(rcv_data),
+		.byte_received(byte_received),
+		.rcving(rcving),
+		.w_enable(w_enable),
+		.r_error(r_error)
+	);
 endmodule 
