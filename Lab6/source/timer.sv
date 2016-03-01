@@ -28,7 +28,7 @@ module timer
 		.clear(d_edge),
 		.count_enable(rcving),
 		.rollover_val(4'd8),
-		.count_out(data_sync),
+		.count_out(data_sync)
 	);
 
 assign shift_enable = (data_sync == 3);

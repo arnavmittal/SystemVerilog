@@ -58,7 +58,7 @@ module usb_receiver
 	);
 
 	//-----------------------------------Edge Detect
-	edge_detct EDGE_DETECT
+	edge_detect EDGE_DETECT
 	(
 		.clk(clk),
 		.n_rst(n_rst),
@@ -127,4 +127,5 @@ module usb_receiver
 		.w_enable(w_enable),
 		.r_error(r_error)
 	);
+
 endmodule 

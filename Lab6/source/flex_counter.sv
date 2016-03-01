@@ -76,7 +76,7 @@ module flex_counter
 				if (curr_count == rollover_val )
 				begin
 					next_rollover_flag = 1'b0;
-					next_count = {'0,1'b1};
+					next_count = 1'b1;
 				end
 			end
 			else

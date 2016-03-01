@@ -38,7 +38,7 @@ TB_HELPER_FILES	:=
 # The contents of these variables must either be plain text (no functions or variable references)
 # or references to the Phase 1 submodule code file variables
 COMPONENT_FILES	:= $(EDGE_FILE) $(EOP_FILE) $(DECODE_FILE) $(RX_FIFO_FILE)
-COMPONENT_FILES += shift_register.sv rcu.sv timer.sv sync.sv
+COMPONENT_FILES += shift_register.sv rcu.sv timer.sv sync_high.sv sync_low.sv
 COMPONENT_FILES += flex_counter.sv flex_stp_sr.sv
 
 # Specify the name of the top level file (do not include the source folder in the name)
