@@ -25,7 +25,7 @@ module timer
 	(
 		.clk(clk),
 		.n_rst(n_rst),
-		.clear(d_edge),
+		.clear(d_edge || ~rcving),
 		.count_enable(rcving),
 		.rollover_val(4'd8),
 		.count_out(data_sync)
@@ -37,7 +37,7 @@ assign shift_enable = (data_sync == 3);
 	(
 		.clk(clk),
 		.n_rst(n_rst),
-		.clear(~rcving),
+		.clear(~rcving || byte_received),
 		.count_enable(shift_enable),
 		.rollover_val(4'd8),
 		.count_out(count_out2),

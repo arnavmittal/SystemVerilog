@@ -14,7 +14,8 @@ module usb_receiver
 	input wire d_plus,
 	input wire d_minus,
 	input wire r_enable,
-	output wire [7:0] r_data,
+	
+	output reg [7:0] r_data,
 	output reg empty,
 	output reg full,
 	output reg rcving,

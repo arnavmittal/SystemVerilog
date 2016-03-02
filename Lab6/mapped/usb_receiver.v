@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////////////
 // Created by: Synopsys DC Expert(TM) in wire load mode
 // Version   : K-2015.06-SP1
-// Date      : Tue Mar  1 11:54:21 2016
+// Date      : Tue Mar  1 20:08:57 2016
 /////////////////////////////////////////////////////////////
 
 
@@ -182,18 +182,20 @@ endmodule
 module timer ( clk, n_rst, d_edge, rcving, shift_enable, byte_received );
   input clk, n_rst, d_edge, rcving;
   output shift_enable, byte_received;
-  wire   n1, n2, n4;
+  wire   _0_net_, _2_net_, n1, n2, n3;
   wire   [3:0] data_sync;
 
   flex_counter_NUM_CNT_BITS4_1 COUNT1 ( .clk(clk), .n_rst(n_rst), .clear(
-        d_edge), .count_enable(rcving), .rollover_val({1'b1, 1'b0, 1'b0, 1'b0}), .count_out(data_sync) );
-  flex_counter_NUM_CNT_BITS4_0 COUNT2 ( .clk(clk), .n_rst(n_rst), .clear(n4), 
-        .count_enable(shift_enable), .rollover_val({1'b1, 1'b0, 1'b0, 1'b0}), 
-        .rollover_flag(byte_received) );
+        _0_net_), .count_enable(rcving), .rollover_val({1'b1, 1'b0, 1'b0, 1'b0}), .count_out(data_sync) );
+  flex_counter_NUM_CNT_BITS4_0 COUNT2 ( .clk(clk), .n_rst(n_rst), .clear(
+        _2_net_), .count_enable(shift_enable), .rollover_val({1'b1, 1'b0, 1'b0, 
+        1'b0}), .rollover_flag(byte_received) );
   INVX1 U3 ( .A(n1), .Y(shift_enable) );
   NAND3X1 U4 ( .A(data_sync[1]), .B(data_sync[0]), .C(n2), .Y(n1) );
   NOR2X1 U5 ( .A(data_sync[3]), .B(data_sync[2]), .Y(n2) );
-  INVX1 U6 ( .A(rcving), .Y(n4) );
+  OR2X1 U6 ( .A(byte_received), .B(n3), .Y(_2_net_) );
+  OR2X1 U7 ( .A(d_edge), .B(n3), .Y(_0_net_) );
+  INVX1 U8 ( .A(rcving), .Y(n3) );
 endmodule
 
 
@@ -389,103 +391,103 @@ module fiforam ( wclk, wenable, waddr, raddr, wdata, rdata );
   DFFPOSX1 \fiforeg_reg[7][2]  ( .D(n91), .CLK(wclk), .Q(\fiforeg[7][2] ) );
   DFFPOSX1 \fiforeg_reg[7][1]  ( .D(n90), .CLK(wclk), .Q(\fiforeg[7][1] ) );
   DFFPOSX1 \fiforeg_reg[7][0]  ( .D(n89), .CLK(wclk), .Q(\fiforeg[7][0] ) );
-  BUFX2 U2 ( .A(n54), .Y(n1) );
-  BUFX2 U3 ( .A(n56), .Y(n2) );
-  BUFX2 U4 ( .A(n175), .Y(n3) );
-  BUFX2 U5 ( .A(n53), .Y(n4) );
-  BUFX2 U6 ( .A(n172), .Y(n5) );
+  BUFX2 U2 ( .A(n56), .Y(n1) );
+  BUFX2 U3 ( .A(n175), .Y(n2) );
+  BUFX2 U4 ( .A(n53), .Y(n3) );
+  BUFX2 U5 ( .A(n172), .Y(n4) );
+  BUFX2 U6 ( .A(n54), .Y(n5) );
   BUFX2 U7 ( .A(n173), .Y(n6) );
   BUFX2 U8 ( .A(n55), .Y(n7) );
   BUFX2 U9 ( .A(n174), .Y(n8) );
   NOR2X1 U10 ( .A(n63), .B(N11), .Y(n54) );
   NOR2X1 U11 ( .A(n63), .B(n62), .Y(n53) );
-  AOI22X1 U12 ( .A(\fiforeg[4][0] ), .B(n1), .C(\fiforeg[6][0] ), .D(n4), .Y(
+  AOI22X1 U12 ( .A(\fiforeg[4][0] ), .B(n5), .C(\fiforeg[6][0] ), .D(n3), .Y(
         n10) );
   NOR2X1 U13 ( .A(N11), .B(N12), .Y(n56) );
   NOR2X1 U14 ( .A(n62), .B(N12), .Y(n55) );
-  AOI22X1 U15 ( .A(\fiforeg[0][0] ), .B(n2), .C(\fiforeg[2][0] ), .D(n7), .Y(
+  AOI22X1 U15 ( .A(\fiforeg[0][0] ), .B(n1), .C(\fiforeg[2][0] ), .D(n7), .Y(
         n9) );
   AOI21X1 U16 ( .A(n10), .B(n9), .C(N10), .Y(n14) );
-  AOI22X1 U17 ( .A(\fiforeg[5][0] ), .B(n1), .C(\fiforeg[7][0] ), .D(n4), .Y(
+  AOI22X1 U17 ( .A(\fiforeg[5][0] ), .B(n5), .C(\fiforeg[7][0] ), .D(n3), .Y(
         n12) );
-  AOI22X1 U18 ( .A(\fiforeg[1][0] ), .B(n2), .C(\fiforeg[3][0] ), .D(n7), .Y(
+  AOI22X1 U18 ( .A(\fiforeg[1][0] ), .B(n1), .C(\fiforeg[3][0] ), .D(n7), .Y(
         n11) );
   AOI21X1 U19 ( .A(n12), .B(n11), .C(n61), .Y(n13) );
   OR2X1 U20 ( .A(n14), .B(n13), .Y(rdata[0]) );
-  AOI22X1 U21 ( .A(\fiforeg[4][1] ), .B(n1), .C(\fiforeg[6][1] ), .D(n4), .Y(
+  AOI22X1 U21 ( .A(\fiforeg[4][1] ), .B(n5), .C(\fiforeg[6][1] ), .D(n3), .Y(
         n16) );
-  AOI22X1 U22 ( .A(\fiforeg[0][1] ), .B(n2), .C(\fiforeg[2][1] ), .D(n7), .Y(
+  AOI22X1 U22 ( .A(\fiforeg[0][1] ), .B(n1), .C(\fiforeg[2][1] ), .D(n7), .Y(
         n15) );
   AOI21X1 U23 ( .A(n16), .B(n15), .C(N10), .Y(n20) );
-  AOI22X1 U24 ( .A(\fiforeg[5][1] ), .B(n1), .C(\fiforeg[7][1] ), .D(n4), .Y(
+  AOI22X1 U24 ( .A(\fiforeg[5][1] ), .B(n5), .C(\fiforeg[7][1] ), .D(n3), .Y(
         n18) );
-  AOI22X1 U25 ( .A(\fiforeg[1][1] ), .B(n2), .C(\fiforeg[3][1] ), .D(n7), .Y(
+  AOI22X1 U25 ( .A(\fiforeg[1][1] ), .B(n1), .C(\fiforeg[3][1] ), .D(n7), .Y(
         n17) );
   AOI21X1 U26 ( .A(n18), .B(n17), .C(n61), .Y(n19) );
   OR2X1 U27 ( .A(n20), .B(n19), .Y(rdata[1]) );
-  AOI22X1 U28 ( .A(\fiforeg[4][2] ), .B(n1), .C(\fiforeg[6][2] ), .D(n4), .Y(
+  AOI22X1 U28 ( .A(\fiforeg[4][2] ), .B(n5), .C(\fiforeg[6][2] ), .D(n3), .Y(
         n22) );
-  AOI22X1 U29 ( .A(\fiforeg[0][2] ), .B(n2), .C(\fiforeg[2][2] ), .D(n7), .Y(
+  AOI22X1 U29 ( .A(\fiforeg[0][2] ), .B(n1), .C(\fiforeg[2][2] ), .D(n7), .Y(
         n21) );
   AOI21X1 U30 ( .A(n22), .B(n21), .C(N10), .Y(n26) );
-  AOI22X1 U31 ( .A(\fiforeg[5][2] ), .B(n1), .C(\fiforeg[7][2] ), .D(n4), .Y(
+  AOI22X1 U31 ( .A(\fiforeg[5][2] ), .B(n5), .C(\fiforeg[7][2] ), .D(n3), .Y(
         n24) );
-  AOI22X1 U32 ( .A(\fiforeg[1][2] ), .B(n2), .C(\fiforeg[3][2] ), .D(n7), .Y(
+  AOI22X1 U32 ( .A(\fiforeg[1][2] ), .B(n1), .C(\fiforeg[3][2] ), .D(n7), .Y(
         n23) );
   AOI21X1 U33 ( .A(n24), .B(n23), .C(n61), .Y(n25) );
   OR2X1 U34 ( .A(n26), .B(n25), .Y(rdata[2]) );
-  AOI22X1 U35 ( .A(\fiforeg[4][3] ), .B(n1), .C(\fiforeg[6][3] ), .D(n4), .Y(
+  AOI22X1 U35 ( .A(\fiforeg[4][3] ), .B(n5), .C(\fiforeg[6][3] ), .D(n3), .Y(
         n28) );
-  AOI22X1 U36 ( .A(\fiforeg[0][3] ), .B(n2), .C(\fiforeg[2][3] ), .D(n7), .Y(
+  AOI22X1 U36 ( .A(\fiforeg[0][3] ), .B(n1), .C(\fiforeg[2][3] ), .D(n7), .Y(
         n27) );
   AOI21X1 U37 ( .A(n28), .B(n27), .C(N10), .Y(n32) );
-  AOI22X1 U38 ( .A(\fiforeg[5][3] ), .B(n1), .C(\fiforeg[7][3] ), .D(n4), .Y(
+  AOI22X1 U38 ( .A(\fiforeg[5][3] ), .B(n5), .C(\fiforeg[7][3] ), .D(n3), .Y(
         n30) );
-  AOI22X1 U39 ( .A(\fiforeg[1][3] ), .B(n2), .C(\fiforeg[3][3] ), .D(n7), .Y(
+  AOI22X1 U39 ( .A(\fiforeg[1][3] ), .B(n1), .C(\fiforeg[3][3] ), .D(n7), .Y(
         n29) );
   AOI21X1 U40 ( .A(n30), .B(n29), .C(n61), .Y(n31) );
   OR2X1 U41 ( .A(n32), .B(n31), .Y(rdata[3]) );
-  AOI22X1 U42 ( .A(\fiforeg[4][4] ), .B(n1), .C(\fiforeg[6][4] ), .D(n4), .Y(
+  AOI22X1 U42 ( .A(\fiforeg[4][4] ), .B(n5), .C(\fiforeg[6][4] ), .D(n3), .Y(
         n34) );
-  AOI22X1 U43 ( .A(\fiforeg[0][4] ), .B(n2), .C(\fiforeg[2][4] ), .D(n7), .Y(
+  AOI22X1 U43 ( .A(\fiforeg[0][4] ), .B(n1), .C(\fiforeg[2][4] ), .D(n7), .Y(
         n33) );
   AOI21X1 U44 ( .A(n34), .B(n33), .C(N10), .Y(n38) );
-  AOI22X1 U45 ( .A(\fiforeg[5][4] ), .B(n1), .C(\fiforeg[7][4] ), .D(n4), .Y(
+  AOI22X1 U45 ( .A(\fiforeg[5][4] ), .B(n5), .C(\fiforeg[7][4] ), .D(n3), .Y(
         n36) );
-  AOI22X1 U46 ( .A(\fiforeg[1][4] ), .B(n2), .C(\fiforeg[3][4] ), .D(n7), .Y(
+  AOI22X1 U46 ( .A(\fiforeg[1][4] ), .B(n1), .C(\fiforeg[3][4] ), .D(n7), .Y(
         n35) );
   AOI21X1 U47 ( .A(n36), .B(n35), .C(n61), .Y(n37) );
   OR2X1 U48 ( .A(n38), .B(n37), .Y(rdata[4]) );
-  AOI22X1 U49 ( .A(\fiforeg[4][5] ), .B(n1), .C(\fiforeg[6][5] ), .D(n4), .Y(
+  AOI22X1 U49 ( .A(\fiforeg[4][5] ), .B(n5), .C(\fiforeg[6][5] ), .D(n3), .Y(
         n40) );
-  AOI22X1 U50 ( .A(\fiforeg[0][5] ), .B(n2), .C(\fiforeg[2][5] ), .D(n7), .Y(
+  AOI22X1 U50 ( .A(\fiforeg[0][5] ), .B(n1), .C(\fiforeg[2][5] ), .D(n7), .Y(
         n39) );
   AOI21X1 U51 ( .A(n40), .B(n39), .C(N10), .Y(n44) );
-  AOI22X1 U52 ( .A(\fiforeg[5][5] ), .B(n1), .C(\fiforeg[7][5] ), .D(n4), .Y(
+  AOI22X1 U52 ( .A(\fiforeg[5][5] ), .B(n5), .C(\fiforeg[7][5] ), .D(n3), .Y(
         n42) );
-  AOI22X1 U53 ( .A(\fiforeg[1][5] ), .B(n2), .C(\fiforeg[3][5] ), .D(n7), .Y(
+  AOI22X1 U53 ( .A(\fiforeg[1][5] ), .B(n1), .C(\fiforeg[3][5] ), .D(n7), .Y(
         n41) );
   AOI21X1 U54 ( .A(n42), .B(n41), .C(n61), .Y(n43) );
   OR2X1 U55 ( .A(n44), .B(n43), .Y(rdata[5]) );
-  AOI22X1 U56 ( .A(\fiforeg[4][6] ), .B(n1), .C(\fiforeg[6][6] ), .D(n4), .Y(
+  AOI22X1 U56 ( .A(\fiforeg[4][6] ), .B(n5), .C(\fiforeg[6][6] ), .D(n3), .Y(
         n46) );
-  AOI22X1 U57 ( .A(\fiforeg[0][6] ), .B(n2), .C(\fiforeg[2][6] ), .D(n7), .Y(
+  AOI22X1 U57 ( .A(\fiforeg[0][6] ), .B(n1), .C(\fiforeg[2][6] ), .D(n7), .Y(
         n45) );
   AOI21X1 U58 ( .A(n46), .B(n45), .C(N10), .Y(n50) );
-  AOI22X1 U59 ( .A(\fiforeg[5][6] ), .B(n1), .C(\fiforeg[7][6] ), .D(n4), .Y(
+  AOI22X1 U59 ( .A(\fiforeg[5][6] ), .B(n5), .C(\fiforeg[7][6] ), .D(n3), .Y(
         n48) );
-  AOI22X1 U60 ( .A(\fiforeg[1][6] ), .B(n2), .C(\fiforeg[3][6] ), .D(n7), .Y(
+  AOI22X1 U60 ( .A(\fiforeg[1][6] ), .B(n1), .C(\fiforeg[3][6] ), .D(n7), .Y(
         n47) );
   AOI21X1 U61 ( .A(n48), .B(n47), .C(n61), .Y(n49) );
   OR2X1 U62 ( .A(n50), .B(n49), .Y(rdata[6]) );
-  AOI22X1 U63 ( .A(\fiforeg[4][7] ), .B(n1), .C(\fiforeg[6][7] ), .D(n4), .Y(
+  AOI22X1 U63 ( .A(\fiforeg[4][7] ), .B(n5), .C(\fiforeg[6][7] ), .D(n3), .Y(
         n52) );
-  AOI22X1 U64 ( .A(\fiforeg[0][7] ), .B(n2), .C(\fiforeg[2][7] ), .D(n7), .Y(
+  AOI22X1 U64 ( .A(\fiforeg[0][7] ), .B(n1), .C(\fiforeg[2][7] ), .D(n7), .Y(
         n51) );
   AOI21X1 U65 ( .A(n52), .B(n51), .C(N10), .Y(n60) );
-  AOI22X1 U66 ( .A(\fiforeg[5][7] ), .B(n1), .C(\fiforeg[7][7] ), .D(n4), .Y(
+  AOI22X1 U66 ( .A(\fiforeg[5][7] ), .B(n5), .C(\fiforeg[7][7] ), .D(n3), .Y(
         n58) );
-  AOI22X1 U67 ( .A(\fiforeg[1][7] ), .B(n2), .C(\fiforeg[3][7] ), .D(n7), .Y(
+  AOI22X1 U67 ( .A(\fiforeg[1][7] ), .B(n1), .C(\fiforeg[3][7] ), .D(n7), .Y(
         n57) );
   AOI21X1 U68 ( .A(n58), .B(n57), .C(n61), .Y(n59) );
   OR2X1 U69 ( .A(n60), .B(n59), .Y(rdata[7]) );
@@ -494,93 +496,93 @@ module fiforam ( wclk, wenable, waddr, raddr, wdata, rdata );
   INVX2 U72 ( .A(N12), .Y(n63) );
   NOR2X1 U73 ( .A(n211), .B(N14), .Y(n173) );
   NOR2X1 U74 ( .A(n211), .B(n180), .Y(n172) );
-  AOI22X1 U75 ( .A(\fiforeg[4][0] ), .B(n6), .C(\fiforeg[6][0] ), .D(n5), .Y(
+  AOI22X1 U75 ( .A(\fiforeg[4][0] ), .B(n6), .C(\fiforeg[6][0] ), .D(n4), .Y(
         n65) );
   NOR2X1 U76 ( .A(N14), .B(N15), .Y(n175) );
   NOR2X1 U77 ( .A(n180), .B(N15), .Y(n174) );
-  AOI22X1 U78 ( .A(\fiforeg[0][0] ), .B(n3), .C(\fiforeg[2][0] ), .D(n8), .Y(
+  AOI22X1 U78 ( .A(\fiforeg[0][0] ), .B(n2), .C(\fiforeg[2][0] ), .D(n8), .Y(
         n64) );
   AOI21X1 U79 ( .A(n65), .B(n64), .C(N13), .Y(n69) );
-  AOI22X1 U80 ( .A(\fiforeg[5][0] ), .B(n6), .C(\fiforeg[7][0] ), .D(n5), .Y(
+  AOI22X1 U80 ( .A(\fiforeg[5][0] ), .B(n6), .C(\fiforeg[7][0] ), .D(n4), .Y(
         n67) );
-  AOI22X1 U81 ( .A(\fiforeg[1][0] ), .B(n3), .C(\fiforeg[3][0] ), .D(n8), .Y(
+  AOI22X1 U81 ( .A(\fiforeg[1][0] ), .B(n2), .C(\fiforeg[3][0] ), .D(n8), .Y(
         n66) );
   AOI21X1 U82 ( .A(n67), .B(n66), .C(n212), .Y(n68) );
   OR2X1 U83 ( .A(n69), .B(n68), .Y(N24) );
-  AOI22X1 U84 ( .A(\fiforeg[4][1] ), .B(n6), .C(\fiforeg[6][1] ), .D(n5), .Y(
+  AOI22X1 U84 ( .A(\fiforeg[4][1] ), .B(n6), .C(\fiforeg[6][1] ), .D(n4), .Y(
         n71) );
-  AOI22X1 U85 ( .A(\fiforeg[0][1] ), .B(n3), .C(\fiforeg[2][1] ), .D(n8), .Y(
+  AOI22X1 U85 ( .A(\fiforeg[0][1] ), .B(n2), .C(\fiforeg[2][1] ), .D(n8), .Y(
         n70) );
   AOI21X1 U86 ( .A(n71), .B(n70), .C(N13), .Y(n75) );
-  AOI22X1 U87 ( .A(\fiforeg[5][1] ), .B(n6), .C(\fiforeg[7][1] ), .D(n5), .Y(
+  AOI22X1 U87 ( .A(\fiforeg[5][1] ), .B(n6), .C(\fiforeg[7][1] ), .D(n4), .Y(
         n73) );
-  AOI22X1 U88 ( .A(\fiforeg[1][1] ), .B(n3), .C(\fiforeg[3][1] ), .D(n8), .Y(
+  AOI22X1 U88 ( .A(\fiforeg[1][1] ), .B(n2), .C(\fiforeg[3][1] ), .D(n8), .Y(
         n72) );
   AOI21X1 U89 ( .A(n73), .B(n72), .C(n212), .Y(n74) );
   OR2X1 U90 ( .A(n75), .B(n74), .Y(N23) );
-  AOI22X1 U91 ( .A(\fiforeg[4][2] ), .B(n6), .C(\fiforeg[6][2] ), .D(n5), .Y(
+  AOI22X1 U91 ( .A(\fiforeg[4][2] ), .B(n6), .C(\fiforeg[6][2] ), .D(n4), .Y(
         n77) );
-  AOI22X1 U92 ( .A(\fiforeg[0][2] ), .B(n3), .C(\fiforeg[2][2] ), .D(n8), .Y(
+  AOI22X1 U92 ( .A(\fiforeg[0][2] ), .B(n2), .C(\fiforeg[2][2] ), .D(n8), .Y(
         n76) );
   AOI21X1 U93 ( .A(n77), .B(n76), .C(N13), .Y(n81) );
-  AOI22X1 U94 ( .A(\fiforeg[5][2] ), .B(n6), .C(\fiforeg[7][2] ), .D(n5), .Y(
+  AOI22X1 U94 ( .A(\fiforeg[5][2] ), .B(n6), .C(\fiforeg[7][2] ), .D(n4), .Y(
         n79) );
-  AOI22X1 U95 ( .A(\fiforeg[1][2] ), .B(n3), .C(\fiforeg[3][2] ), .D(n8), .Y(
+  AOI22X1 U95 ( .A(\fiforeg[1][2] ), .B(n2), .C(\fiforeg[3][2] ), .D(n8), .Y(
         n78) );
   AOI21X1 U96 ( .A(n79), .B(n78), .C(n212), .Y(n80) );
   OR2X1 U97 ( .A(n81), .B(n80), .Y(N22) );
-  AOI22X1 U98 ( .A(\fiforeg[4][3] ), .B(n6), .C(\fiforeg[6][3] ), .D(n5), .Y(
+  AOI22X1 U98 ( .A(\fiforeg[4][3] ), .B(n6), .C(\fiforeg[6][3] ), .D(n4), .Y(
         n83) );
-  AOI22X1 U99 ( .A(\fiforeg[0][3] ), .B(n3), .C(\fiforeg[2][3] ), .D(n8), .Y(
+  AOI22X1 U99 ( .A(\fiforeg[0][3] ), .B(n2), .C(\fiforeg[2][3] ), .D(n8), .Y(
         n82) );
   AOI21X1 U100 ( .A(n83), .B(n82), .C(N13), .Y(n87) );
-  AOI22X1 U101 ( .A(\fiforeg[5][3] ), .B(n6), .C(\fiforeg[7][3] ), .D(n5), .Y(
+  AOI22X1 U101 ( .A(\fiforeg[5][3] ), .B(n6), .C(\fiforeg[7][3] ), .D(n4), .Y(
         n85) );
-  AOI22X1 U102 ( .A(\fiforeg[1][3] ), .B(n3), .C(\fiforeg[3][3] ), .D(n8), .Y(
+  AOI22X1 U102 ( .A(\fiforeg[1][3] ), .B(n2), .C(\fiforeg[3][3] ), .D(n8), .Y(
         n84) );
   AOI21X1 U103 ( .A(n85), .B(n84), .C(n212), .Y(n86) );
   OR2X1 U104 ( .A(n87), .B(n86), .Y(N21) );
-  AOI22X1 U105 ( .A(\fiforeg[4][4] ), .B(n6), .C(\fiforeg[6][4] ), .D(n5), .Y(
+  AOI22X1 U105 ( .A(\fiforeg[4][4] ), .B(n6), .C(\fiforeg[6][4] ), .D(n4), .Y(
         n153) );
-  AOI22X1 U106 ( .A(\fiforeg[0][4] ), .B(n3), .C(\fiforeg[2][4] ), .D(n8), .Y(
+  AOI22X1 U106 ( .A(\fiforeg[0][4] ), .B(n2), .C(\fiforeg[2][4] ), .D(n8), .Y(
         n88) );
   AOI21X1 U107 ( .A(n153), .B(n88), .C(N13), .Y(n157) );
-  AOI22X1 U108 ( .A(\fiforeg[5][4] ), .B(n6), .C(\fiforeg[7][4] ), .D(n5), .Y(
+  AOI22X1 U108 ( .A(\fiforeg[5][4] ), .B(n6), .C(\fiforeg[7][4] ), .D(n4), .Y(
         n155) );
-  AOI22X1 U109 ( .A(\fiforeg[1][4] ), .B(n3), .C(\fiforeg[3][4] ), .D(n8), .Y(
+  AOI22X1 U109 ( .A(\fiforeg[1][4] ), .B(n2), .C(\fiforeg[3][4] ), .D(n8), .Y(
         n154) );
   AOI21X1 U110 ( .A(n155), .B(n154), .C(n212), .Y(n156) );
   OR2X1 U111 ( .A(n157), .B(n156), .Y(N20) );
-  AOI22X1 U112 ( .A(\fiforeg[4][5] ), .B(n6), .C(\fiforeg[6][5] ), .D(n5), .Y(
+  AOI22X1 U112 ( .A(\fiforeg[4][5] ), .B(n6), .C(\fiforeg[6][5] ), .D(n4), .Y(
         n159) );
-  AOI22X1 U113 ( .A(\fiforeg[0][5] ), .B(n3), .C(\fiforeg[2][5] ), .D(n8), .Y(
+  AOI22X1 U113 ( .A(\fiforeg[0][5] ), .B(n2), .C(\fiforeg[2][5] ), .D(n8), .Y(
         n158) );
   AOI21X1 U114 ( .A(n159), .B(n158), .C(N13), .Y(n163) );
-  AOI22X1 U115 ( .A(\fiforeg[5][5] ), .B(n6), .C(\fiforeg[7][5] ), .D(n5), .Y(
+  AOI22X1 U115 ( .A(\fiforeg[5][5] ), .B(n6), .C(\fiforeg[7][5] ), .D(n4), .Y(
         n161) );
-  AOI22X1 U116 ( .A(\fiforeg[1][5] ), .B(n3), .C(\fiforeg[3][5] ), .D(n8), .Y(
+  AOI22X1 U116 ( .A(\fiforeg[1][5] ), .B(n2), .C(\fiforeg[3][5] ), .D(n8), .Y(
         n160) );
   AOI21X1 U117 ( .A(n161), .B(n160), .C(n212), .Y(n162) );
   OR2X1 U118 ( .A(n163), .B(n162), .Y(N19) );
-  AOI22X1 U119 ( .A(\fiforeg[4][6] ), .B(n6), .C(\fiforeg[6][6] ), .D(n5), .Y(
+  AOI22X1 U119 ( .A(\fiforeg[4][6] ), .B(n6), .C(\fiforeg[6][6] ), .D(n4), .Y(
         n165) );
-  AOI22X1 U120 ( .A(\fiforeg[0][6] ), .B(n3), .C(\fiforeg[2][6] ), .D(n8), .Y(
+  AOI22X1 U120 ( .A(\fiforeg[0][6] ), .B(n2), .C(\fiforeg[2][6] ), .D(n8), .Y(
         n164) );
   AOI21X1 U121 ( .A(n165), .B(n164), .C(N13), .Y(n169) );
-  AOI22X1 U122 ( .A(\fiforeg[5][6] ), .B(n6), .C(\fiforeg[7][6] ), .D(n5), .Y(
+  AOI22X1 U122 ( .A(\fiforeg[5][6] ), .B(n6), .C(\fiforeg[7][6] ), .D(n4), .Y(
         n167) );
-  AOI22X1 U123 ( .A(\fiforeg[1][6] ), .B(n3), .C(\fiforeg[3][6] ), .D(n8), .Y(
+  AOI22X1 U123 ( .A(\fiforeg[1][6] ), .B(n2), .C(\fiforeg[3][6] ), .D(n8), .Y(
         n166) );
   AOI21X1 U124 ( .A(n167), .B(n166), .C(n212), .Y(n168) );
   OR2X1 U125 ( .A(n169), .B(n168), .Y(N18) );
-  AOI22X1 U126 ( .A(\fiforeg[4][7] ), .B(n6), .C(\fiforeg[6][7] ), .D(n5), .Y(
+  AOI22X1 U126 ( .A(\fiforeg[4][7] ), .B(n6), .C(\fiforeg[6][7] ), .D(n4), .Y(
         n171) );
-  AOI22X1 U127 ( .A(\fiforeg[0][7] ), .B(n3), .C(\fiforeg[2][7] ), .D(n8), .Y(
+  AOI22X1 U127 ( .A(\fiforeg[0][7] ), .B(n2), .C(\fiforeg[2][7] ), .D(n8), .Y(
         n170) );
   AOI21X1 U128 ( .A(n171), .B(n170), .C(N13), .Y(n179) );
-  AOI22X1 U129 ( .A(\fiforeg[5][7] ), .B(n6), .C(\fiforeg[7][7] ), .D(n5), .Y(
+  AOI22X1 U129 ( .A(\fiforeg[5][7] ), .B(n6), .C(\fiforeg[7][7] ), .D(n4), .Y(
         n177) );
-  AOI22X1 U130 ( .A(\fiforeg[1][7] ), .B(n3), .C(\fiforeg[3][7] ), .D(n8), .Y(
+  AOI22X1 U130 ( .A(\fiforeg[1][7] ), .B(n2), .C(\fiforeg[3][7] ), .D(n8), .Y(
         n176) );
   AOI21X1 U131 ( .A(n177), .B(n176), .C(n212), .Y(n178) );
   OR2X1 U132 ( .A(n179), .B(n178), .Y(N17) );
@@ -957,93 +959,101 @@ module rcu ( clk, n_rst, d_edge, eop, shift_enable, rcv_data, byte_received,
          n16, n17, n18, n19, n20, n21, n22, n23, n24, n25, n26, n27, n28, n29,
          n30, n31, n32, n33, n34, n35, n36, n37, n38, n39, n40, n41, n42, n43,
          n44, n45, n46, n47, n48, n49, n50, n51, n52, n53, n54, n55, n56, n57,
-         n58, n59, n60, n61, n62, n63;
+         n58, n59, n60, n61, n62, n63, n64, n65, n66, n67, n68, n69, n70;
   wire   [3:0] state;
 
   DFFSR \state_reg[0]  ( .D(n74), .CLK(clk), .R(n_rst), .S(1'b1), .Q(state[0])
          );
-  DFFSR \state_reg[2]  ( .D(n71), .CLK(clk), .R(n_rst), .S(1'b1), .Q(state[2])
+  DFFSR \state_reg[1]  ( .D(n71), .CLK(clk), .R(n_rst), .S(1'b1), .Q(state[1])
          );
-  DFFSR \state_reg[1]  ( .D(n72), .CLK(clk), .R(n_rst), .S(1'b1), .Q(state[1])
+  DFFSR \state_reg[2]  ( .D(n72), .CLK(clk), .R(n_rst), .S(1'b1), .Q(state[2])
          );
   DFFSR \state_reg[3]  ( .D(n73), .CLK(clk), .R(n_rst), .S(1'b1), .Q(state[3])
          );
-  OAI21X1 U7 ( .A(state[3]), .B(n5), .C(n6), .Y(rcving) );
-  OAI21X1 U8 ( .A(n7), .B(n8), .C(n9), .Y(r_error) );
-  OAI21X1 U9 ( .A(n10), .B(n11), .C(n12), .Y(n74) );
-  OAI21X1 U10 ( .A(n13), .B(n10), .C(state[0]), .Y(n12) );
-  INVX1 U11 ( .A(n14), .Y(n13) );
-  NOR2X1 U12 ( .A(n15), .B(n16), .Y(n11) );
-  OR2X1 U13 ( .A(n17), .B(n18), .Y(n16) );
-  OAI22X1 U14 ( .A(n19), .B(n20), .C(n21), .D(byte_received), .Y(n17) );
-  OAI21X1 U15 ( .A(n22), .B(n23), .C(n24), .Y(n15) );
-  NOR2X1 U16 ( .A(w_enable), .B(n25), .Y(n24) );
-  NOR2X1 U17 ( .A(n20), .B(n26), .Y(w_enable) );
-  NAND3X1 U18 ( .A(n27), .B(n8), .C(n28), .Y(n20) );
-  OR2X1 U19 ( .A(n29), .B(eop), .Y(n23) );
-  INVX1 U20 ( .A(n30), .Y(n10) );
-  NAND3X1 U21 ( .A(n31), .B(n6), .C(n32), .Y(n73) );
-  AOI22X1 U22 ( .A(state[3]), .B(n33), .C(n34), .D(n19), .Y(n32) );
-  INVX1 U23 ( .A(d_edge), .Y(n19) );
-  OAI21X1 U24 ( .A(n25), .B(n35), .C(n36), .Y(n31) );
-  INVX1 U25 ( .A(n37), .Y(n25) );
-  OAI21X1 U26 ( .A(n38), .B(n27), .C(n39), .Y(n72) );
-  OAI21X1 U27 ( .A(n40), .B(n41), .C(n30), .Y(n39) );
-  OAI21X1 U28 ( .A(n21), .B(n42), .C(n43), .Y(n41) );
-  INVX1 U29 ( .A(n18), .Y(n43) );
-  OAI22X1 U30 ( .A(state[0]), .B(n44), .C(n36), .D(n45), .Y(n18) );
-  OAI21X1 U31 ( .A(n36), .B(n37), .C(n46), .Y(n40) );
-  NAND2X1 U32 ( .A(n47), .B(n42), .Y(n37) );
-  OR2X1 U33 ( .A(n48), .B(n49), .Y(n71) );
-  OAI21X1 U34 ( .A(n50), .B(n42), .C(n51), .Y(n49) );
-  MUX2X1 U35 ( .B(n35), .A(n52), .S(n36), .Y(n51) );
-  AND2X1 U36 ( .A(shift_enable), .B(eop), .Y(n36) );
-  INVX1 U37 ( .A(n9), .Y(n35) );
-  NAND2X1 U38 ( .A(state[0]), .B(n53), .Y(n9) );
-  INVX1 U39 ( .A(byte_received), .Y(n42) );
-  INVX1 U40 ( .A(n47), .Y(n50) );
-  OAI22X1 U41 ( .A(n38), .B(n26), .C(n44), .D(n54), .Y(n48) );
-  OAI21X1 U42 ( .A(n55), .B(n56), .C(n28), .Y(n54) );
-  NAND3X1 U43 ( .A(rcv_data[7]), .B(n57), .C(n58), .Y(n56) );
-  NOR2X1 U44 ( .A(rcv_data[2]), .B(rcv_data[1]), .Y(n58) );
-  INVX1 U45 ( .A(rcv_data[0]), .Y(n57) );
-  NAND2X1 U46 ( .A(n59), .B(n60), .Y(n55) );
-  NOR2X1 U47 ( .A(rcv_data[6]), .B(rcv_data[5]), .Y(n60) );
-  NOR2X1 U48 ( .A(rcv_data[4]), .B(rcv_data[3]), .Y(n59) );
-  INVX1 U49 ( .A(n33), .Y(n38) );
-  OAI21X1 U50 ( .A(n34), .B(n14), .C(n30), .Y(n33) );
-  OAI21X1 U51 ( .A(n53), .B(n52), .C(n22), .Y(n30) );
-  INVX1 U52 ( .A(shift_enable), .Y(n22) );
-  INVX1 U53 ( .A(n46), .Y(n52) );
-  NAND3X1 U54 ( .A(n29), .B(n21), .C(n61), .Y(n14) );
-  NOR2X1 U55 ( .A(n53), .B(n47), .Y(n61) );
-  NOR2X1 U56 ( .A(n44), .B(n28), .Y(n47) );
-  INVX1 U57 ( .A(state[0]), .Y(n28) );
-  NAND3X1 U58 ( .A(n26), .B(n8), .C(state[1]), .Y(n44) );
-  INVX1 U59 ( .A(n45), .Y(n53) );
-  NAND3X1 U60 ( .A(state[1]), .B(n8), .C(state[2]), .Y(n45) );
-  NAND3X1 U61 ( .A(n62), .B(n8), .C(state[0]), .Y(n21) );
-  INVX1 U62 ( .A(n7), .Y(n62) );
-  AND2X1 U63 ( .A(n46), .B(n6), .Y(n29) );
-  NAND2X1 U64 ( .A(state[3]), .B(n5), .Y(n6) );
-  NOR2X1 U65 ( .A(n7), .B(state[0]), .Y(n5) );
-  NAND3X1 U66 ( .A(state[0]), .B(state[2]), .C(n63), .Y(n46) );
-  NOR2X1 U67 ( .A(state[3]), .B(state[1]), .Y(n63) );
-  NOR2X1 U68 ( .A(n8), .B(n7), .Y(n34) );
-  NAND2X1 U69 ( .A(n26), .B(n27), .Y(n7) );
-  INVX1 U70 ( .A(state[1]), .Y(n27) );
-  INVX1 U71 ( .A(state[2]), .Y(n26) );
-  INVX1 U72 ( .A(state[3]), .Y(n8) );
+  XNOR2X1 U7 ( .A(n5), .B(n6), .Y(rcving) );
+  OAI21X1 U8 ( .A(n6), .B(n7), .C(n8), .Y(r_error) );
+  OR2X1 U9 ( .A(n9), .B(state[2]), .Y(n7) );
+  NAND3X1 U10 ( .A(n10), .B(n11), .C(n12), .Y(n74) );
+  NOR2X1 U11 ( .A(n13), .B(n14), .Y(n12) );
+  OAI21X1 U12 ( .A(n15), .B(n16), .C(n17), .Y(n14) );
+  OR2X1 U13 ( .A(n18), .B(w_enable), .Y(n13) );
+  NOR2X1 U14 ( .A(n19), .B(state[1]), .Y(w_enable) );
+  INVX1 U15 ( .A(n20), .Y(n11) );
+  OAI22X1 U16 ( .A(n21), .B(n22), .C(n23), .D(eop), .Y(n20) );
+  AOI21X1 U17 ( .A(n24), .B(n25), .C(n26), .Y(n10) );
+  MUX2X1 U18 ( .B(n27), .A(n28), .S(n29), .Y(n26) );
+  OAI21X1 U19 ( .A(state[1]), .B(d_edge), .C(n30), .Y(n28) );
+  NOR2X1 U20 ( .A(state[3]), .B(state[2]), .Y(n30) );
+  OR2X1 U21 ( .A(n31), .B(n32), .Y(n73) );
+  OAI21X1 U22 ( .A(d_edge), .B(n17), .C(n22), .Y(n32) );
+  INVX1 U23 ( .A(n33), .Y(n22) );
+  INVX1 U24 ( .A(n34), .Y(n17) );
+  OAI22X1 U25 ( .A(n16), .B(n35), .C(n36), .D(n6), .Y(n31) );
+  INVX1 U26 ( .A(n37), .Y(n16) );
+  OAI21X1 U27 ( .A(byte_received), .B(n38), .C(n8), .Y(n37) );
+  NAND2X1 U28 ( .A(n39), .B(n40), .Y(n72) );
+  AOI21X1 U29 ( .A(n15), .B(n41), .C(n42), .Y(n40) );
+  OAI22X1 U30 ( .A(n36), .B(n43), .C(n44), .D(n45), .Y(n42) );
+  OAI21X1 U31 ( .A(n46), .B(n47), .C(n6), .Y(n45) );
+  NAND3X1 U32 ( .A(rcv_data[7]), .B(n48), .C(n49), .Y(n47) );
+  NOR2X1 U33 ( .A(rcv_data[2]), .B(rcv_data[1]), .Y(n49) );
+  INVX1 U34 ( .A(rcv_data[0]), .Y(n48) );
+  NAND2X1 U35 ( .A(n50), .B(n51), .Y(n46) );
+  NOR2X1 U36 ( .A(rcv_data[6]), .B(rcv_data[5]), .Y(n51) );
+  NOR2X1 U37 ( .A(rcv_data[4]), .B(rcv_data[3]), .Y(n50) );
+  NOR2X1 U38 ( .A(n52), .B(n18), .Y(n36) );
+  INVX1 U39 ( .A(n27), .Y(n52) );
+  AOI21X1 U40 ( .A(byte_received), .B(n53), .C(n54), .Y(n39) );
+  INVX1 U41 ( .A(n38), .Y(n53) );
+  AOI21X1 U42 ( .A(n55), .B(n56), .C(n18), .Y(n71) );
+  NOR2X1 U43 ( .A(n23), .B(shift_enable), .Y(n18) );
+  AOI21X1 U44 ( .A(n57), .B(n21), .C(n58), .Y(n56) );
+  OAI21X1 U45 ( .A(n59), .B(n27), .C(n23), .Y(n58) );
+  NAND3X1 U46 ( .A(n60), .B(n61), .C(n62), .Y(n27) );
+  NOR2X1 U47 ( .A(n33), .B(n63), .Y(n62) );
+  OAI21X1 U48 ( .A(n19), .B(n59), .C(n38), .Y(n63) );
+  OAI21X1 U49 ( .A(n6), .B(n5), .C(n64), .Y(n33) );
+  INVX1 U50 ( .A(n57), .Y(n64) );
+  NAND3X1 U51 ( .A(n59), .B(n43), .C(n29), .Y(n5) );
+  AND2X1 U52 ( .A(n8), .B(n65), .Y(n61) );
+  NOR2X1 U53 ( .A(n41), .B(n34), .Y(n60) );
+  NOR2X1 U54 ( .A(n66), .B(n6), .Y(n34) );
+  INVX1 U55 ( .A(n23), .Y(n41) );
+  NAND3X1 U56 ( .A(state[0]), .B(state[2]), .C(n67), .Y(n23) );
+  NOR2X1 U57 ( .A(state[3]), .B(state[1]), .Y(n67) );
+  NOR2X1 U58 ( .A(n44), .B(n6), .Y(n57) );
+  NAND3X1 U59 ( .A(n29), .B(n43), .C(state[1]), .Y(n44) );
+  NOR2X1 U60 ( .A(n54), .B(n68), .Y(n55) );
+  MUX2X1 U61 ( .B(n65), .A(n38), .S(n25), .Y(n68) );
+  INVX1 U62 ( .A(byte_received), .Y(n25) );
+  NAND3X1 U63 ( .A(n43), .B(n6), .C(n9), .Y(n38) );
+  INVX1 U64 ( .A(n24), .Y(n65) );
+  NOR2X1 U65 ( .A(n66), .B(state[3]), .Y(n24) );
+  NAND3X1 U66 ( .A(n59), .B(n43), .C(state[0]), .Y(n66) );
+  INVX1 U67 ( .A(state[2]), .Y(n43) );
+  OAI21X1 U68 ( .A(n15), .B(n8), .C(n69), .Y(n54) );
+  NAND3X1 U69 ( .A(n70), .B(n21), .C(state[1]), .Y(n69) );
+  INVX1 U70 ( .A(d_edge), .Y(n21) );
+  INVX1 U71 ( .A(n19), .Y(n70) );
+  NAND3X1 U72 ( .A(n29), .B(n6), .C(state[2]), .Y(n19) );
+  NAND3X1 U73 ( .A(state[2]), .B(n6), .C(n9), .Y(n8) );
+  NOR2X1 U74 ( .A(n59), .B(n29), .Y(n9) );
+  INVX1 U75 ( .A(state[0]), .Y(n29) );
+  INVX1 U76 ( .A(state[1]), .Y(n59) );
+  INVX1 U77 ( .A(state[3]), .Y(n6) );
+  INVX1 U78 ( .A(n35), .Y(n15) );
+  NAND2X1 U79 ( .A(shift_enable), .B(eop), .Y(n35) );
 endmodule
 
 
-module usb_receiver ( clk, n_rst, d_plus, d_minus, r_enable, rcv_data, empty, 
+module usb_receiver ( clk, n_rst, d_plus, d_minus, r_enable, r_data, empty, 
         full, rcving, r_error );
-  output [7:0] rcv_data;
+  output [7:0] r_data;
   input clk, n_rst, d_plus, d_minus, r_enable;
   output empty, full, rcving, r_error;
   wire   sync_d_plus, sync_d_minus, eop, d_edge, shift_enable, byte_received,
          d_orig, w_enable;
+  wire   [7:0] rcv_data;
 
   sync_high SYNC_D_PLUS ( .clk(clk), .n_rst(n_rst), .async_in(d_plus), 
         .sync_out(sync_d_plus) );
@@ -1060,7 +1070,8 @@ module usb_receiver ( clk, n_rst, d_plus, d_minus, r_enable, rcv_data, empty,
   shift_register SHIFT_REGISTER ( .clk(clk), .n_rst(n_rst), .shift_enable(
         shift_enable), .d_orig(d_orig), .rcv_data(rcv_data) );
   rx_fifo RX_FIFO ( .clk(clk), .n_rst(n_rst), .r_enable(r_enable), .w_enable(
-        w_enable), .w_data(rcv_data), .empty(empty), .full(full) );
+        w_enable), .w_data(rcv_data), .r_data(r_data), .empty(empty), .full(
+        full) );
   rcu RCU ( .clk(clk), .n_rst(n_rst), .d_edge(d_edge), .eop(eop), 
         .shift_enable(shift_enable), .rcv_data(rcv_data), .byte_received(
         byte_received), .rcving(rcving), .w_enable(w_enable), .r_error(r_error) );
