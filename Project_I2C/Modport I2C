@@ -1,0 +1,19 @@
+modport Slave(
+		input	tx_data,
+			address_mode,
+                        ms_select,
+                        bus_address,
+                        en_clock_strech,
+                        TX_fifo_empty,
+                        RX_fifo_full,
+			SDA_sync,
+			SCL_sync,
+		output 	rx_data_slave,
+			ack_error_clear_slave,
+                        ack_error_set_slave,
+                        busy_slave,
+                        TX_read_enable_slave,
+                        RX_write_enable_slave,
+			SDA_out_slave,
+			SCL_out_slave
+	);
