@@ -1,6 +1,6 @@
 // Description: This is the module for the SDA Selector
 
-module edge_detect
+module sda_select
 (
 	input wire [1:0] sda_mode,
 	output wire tx_out,
