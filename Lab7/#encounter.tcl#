@@ -77,7 +77,7 @@ addFiller -cell FILL
 
 
 # Metal fill
-#addMetalFill -layer {1 2 3} -nets {gnd vdd}
+addMetalFill -layer {1 2 3} -nets {gnd vdd}
 
 # Connect all new cells to VDD/GND
 globalNetConnect vdd -type tiehi
