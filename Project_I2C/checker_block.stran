@@ -7,10 +7,14 @@
 # //  WHICH IS THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS
 # //  LICENSORS AND IS SUBJECT TO LICENSE TERMS.
 # //
-# vsim +no_glitch_msg -L /home/ecegrid/a/ece337/Course_Prod/Cell_Libs/AMI_05/vhdl_work -L /home/ecegrid/a/ece337/Class0.5u/GOLD_LIB -Lf /home/ecegrid/a/ece337/Class0.5u/ECE337_IP/vsim -coverage -voptargs=+acc -i -t ps source_work.tb_timer 
+# vsim +no_glitch_msg -L /home/ecegrid/a/ece337/Course_Prod/Cell_Libs/AMI_05/vhdl_work -L /home/ecegrid/a/ece337/Class0.5u/GOLD_LIB -Lf /home/ecegrid/a/ece337/Class0.5u/ECE337_IP/vsim -coverage -voptargs=+acc -i -t ps source_work.tb_checker_block 
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
 # Loading sv_std.std
-# Loading work.tb_timer(fast)
-# Loading work.timer(fast)
+# Loading work.tb_checker_block(fast)
+# Loading work.checker_block(fast)
 # ** Warning: (vsim-8634) Code was not compiled with coverage options.
 add wave *
-run 10000ns
+run 2000 ns
+run 2000 ns
+run 2000 ns
+run 2000 ns
