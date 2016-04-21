@@ -13,7 +13,7 @@ module tb_edge_detect();
 	reg tb_rising_edge;
 	reg tb_falling_edge;
 	
-	scl_edge DUT
+	edge_detect DUT
 	(
 		.clk(tb_clk),
 		.n_rst(tb_n_rst),
