@@ -39,7 +39,7 @@ module controller
 	reg temp_TX_read_enable_slave;
 	reg temp_RX_write_enable_slave;
 	reg temp_ack_error_set_slave;
-	reg temp_sda_mode;
+	reg [1:0] temp_sda_mode;
 	reg temp_load_data;
 	reg temp_tx_enable;
 
@@ -54,7 +54,7 @@ module controller
 			TX_read_enable_slave <= 1'b0;
 			RX_write_enable_slave <= 1'b0;
 			ack_error_set_slave <= 1'b0;
-			sda_mode <= 1'b0;
+			sda_mode <= 2'b00;
 			load_data <= 1'b0;
 			tx_enable <= 1'b0;
 		end
@@ -291,5 +291,289 @@ module controller
 				end
 			end
 		endcase
-	
+	end
+
+	always @(state)
+	begin
+		temp_rx_enable = 1'b0;
+		temp_SCL_out_slave = 1'b0;
+		temp_busy_slave = 1'b0;
+		temp_TX_read_enable_slave = 1'b0;
+		temp_RX_write_enable_slave = 1'b0;
+		temp_ack_error_set_slave = 1'b0;
+		temp_sda_mode = 2'b00;
+		temp_load_data = 1'b0;
+		temp_tx_enable = 1'b0;
+
+		case (state)
+			IDLE:
+			begin 
+				temp_rx_enable = 1'b1;
+				temp_SCL_out_slave = 1'b0;
+				temp_busy_slave = 1'b0;
+				temp_TX_read_enable_slave = 1'b0;
+				temp_RX_write_enable_slave = 1'b0;
+				temp_ack_error_set_slave = 1'b0;
+				temp_sda_mode = 2'b00;
+				temp_load_data = 1'b0;
+				temp_tx_enable = 1'b0;
+			end
+
+			GET_ADDR_1:
+			begin 
+				temp_rx_enable = 1'b1;
+				temp_SCL_out_slave = 1'b0;
+				temp_busy_slave = 1'b0;
+				temp_TX_read_enable_slave = 1'b0;
+				temp_RX_write_enable_slave = 1'b0;
+				temp_ack_error_set_slave = 1'b0;
+				temp_sda_mode = 2'b00;
+				temp_load_data = 1'b0;
+				temp_tx_enable = 1'b0;
+			end
+
+			CHECK_ADDR_1:
+			begin 
+				temp_rx_enable = 1'b0;
+				temp_SCL_out_slave = 1'b0;
+				temp_busy_slave = 1'b0;
+				temp_TX_read_enable_slave = 1'b0;
+				temp_RX_write_enable_slave = 1'b0;
+				temp_ack_error_set_slave = 1'b0;
+				temp_sda_mode = 2'b00;
+				temp_load_data = 1'b0;
+				temp_tx_enable = 1'b0;
+			end
+
+			NO_MATCH:
+			begin 
+				temp_rx_enable = 1'b1;
+				temp_SCL_out_slave = 1'b0;
+				temp_busy_slave = 1'b0;
+				temp_TX_read_enable_slave = 1'b0;
+				temp_RX_write_enable_slave = 1'b0;
+				temp_ack_error_set_slave = 1'b0;
+				temp_sda_mode = 2'b10;
+				temp_load_data = 1'b0;
+				temp_tx_enable = 1'b0;
+			end
+			ACK_SEND_1:
+			begin 
+				temp_rx_enable = 1'b0;
+				temp_SCL_out_slave = 1'b0;
+				temp_busy_slave = 1'b0;
+				temp_TX_read_enable_slave = 1'b0;
+				temp_RX_write_enable_slave = 1'b0;
+				temp_ack_error_set_slave = 1'b0;
+				temp_sda_mode = 2'b01;
+				temp_load_data = 1'b0;
+				temp_tx_enable = 1'b0;
+			end
+			GET_ADDR_2:
+			begin 
+				temp_rx_enable = 1'b1;
+				temp_SCL_out_slave = 1'b0;
+				temp_busy_slave = 1'b0;
+				temp_TX_read_enable_slave = 1'b0;
+				temp_RX_write_enable_slave = 1'b0;
+				temp_ack_error_set_slave = 1'b0;
+				temp_sda_mode = 2'b00;
+				temp_load_data = 1'b0;
+				temp_tx_enable = 1'b0;
+			end
+			CHECK_ADDR_2:
+			begin 
+				temp_rx_enable = 1'b0;
+				temp_SCL_out_slave = 1'b0;
+				temp_busy_slave = 1'b0;
+				temp_TX_read_enable_slave = 1'b0;
+				temp_RX_write_enable_slave = 1'b0;
+				temp_ack_error_set_slave = 1'b0;
+				temp_sda_mode = 2'b00;
+				temp_load_data = 1'b0;
+				temp_tx_enable = 1'b0;
+			end
+			ACK_SEND_2:
+			begin 
+				temp_rx_enable = 1'b0;
+				temp_SCL_out_slave = 1'b0;
+				temp_busy_slave = 1'b0;
+				temp_TX_read_enable_slave = 1'b0;
+				temp_RX_write_enable_slave = 1'b0;
+				temp_ack_error_set_slave = 1'b0;
+				temp_sda_mode = 2'b01;
+				temp_load_data = 1'b0;
+				temp_tx_enable = 1'b0;
+			end
+			FIFO_CHK_TX:
+			begin 
+				temp_rx_enable = 1'b0;
+				temp_SCL_out_slave = 1'b0;
+				temp_busy_slave = 1'b0;
+				temp_TX_read_enable_slave = 1'b0;
+				temp_RX_write_enable_slave = 1'b0;
+				temp_ack_error_set_slave = 1'b0;
+				temp_sda_mode = 2'b00;
+				temp_load_data = 1'b0;
+				temp_tx_enable = 1'b0;
+			end
+			LOAD:
+			begin 
+				temp_rx_enable = 1'b0;
+				temp_SCL_out_slave = 1'b0;
+				temp_busy_slave = 1'b0;
+				temp_TX_read_enable_slave = 1'b0;
+				temp_RX_write_enable_slave = 1'b0;
+				temp_ack_error_set_slave = 1'b0;
+				temp_sda_mode = 2'b01;
+				temp_load_data = 1'b1;
+				temp_tx_enable = 1'b0;
+			end
+			DATA_START:
+			begin 
+				temp_rx_enable = 1'b0;
+				temp_SCL_out_slave = 1'b0;
+				temp_busy_slave = 1'b0;
+				temp_TX_read_enable_slave = 1'b0;
+				temp_RX_write_enable_slave = 1'b0;
+				temp_ack_error_set_slave = 1'b0;
+				temp_sda_mode = 2'b11;
+				temp_load_data = 1'b0;
+				temp_tx_enable = 1'b1;
+			end
+			DATA_STOP:
+			begin 
+				temp_rx_enable = 1'b0;
+				temp_SCL_out_slave = 1'b0;
+				temp_busy_slave = 1'b0;
+				temp_TX_read_enable_slave = 1'b0;
+				temp_RX_write_enable_slave = 1'b0;
+				temp_ack_error_set_slave = 1'b0;
+				temp_sda_mode = 2'b00;
+				temp_load_data = 1'b0;
+				temp_tx_enable = 1'b0;
+			end
+			ACK_CHECK:
+			begin 
+				temp_rx_enable = 1'b0;
+				temp_SCL_out_slave = 1'b0;
+				temp_busy_slave = 1'b0;
+				temp_TX_read_enable_slave = 1'b0;
+				temp_RX_write_enable_slave = 1'b0;
+				temp_ack_error_set_slave = 1'b0;
+				temp_sda_mode = 2'b00;
+				temp_load_data = 1'b0;
+				temp_tx_enable = 1'b0;
+			end
+			READ_ENABLE:
+			begin 
+				temp_rx_enable = 1'b0;
+				temp_SCL_out_slave = 1'b0;
+				temp_busy_slave = 1'b0;
+				temp_TX_read_enable_slave = 1'b1;
+				temp_RX_write_enable_slave = 1'b0;
+				temp_ack_error_set_slave = 1'b0;
+				temp_sda_mode = 2'b00;
+				temp_load_data = 1'b0;
+				temp_tx_enable = 1'b0;
+			end
+			RE_NACK:
+			begin 
+				temp_rx_enable = 1'b0;
+				temp_SCL_out_slave = 1'b0;
+				temp_busy_slave = 1'b0;
+				temp_TX_read_enable_slave = 1'b0;
+				temp_RX_write_enable_slave = 1'b0;
+				temp_ack_error_set_slave = 1'b0;
+				temp_sda_mode = 2'b00;
+				temp_load_data = 1'b0;
+				temp_tx_enable = 1'b0;
+			end
+			RE_ACK:
+			begin 
+				temp_rx_enable = 1'b0;
+				temp_SCL_out_slave = 1'b0;
+				temp_busy_slave = 1'b0;
+				temp_TX_read_enable_slave = 1'b0;
+				temp_RX_write_enable_slave = 1'b0;
+				temp_ack_error_set_slave = 1'b0;
+				temp_sda_mode = 2'b00;
+				temp_load_data = 1'b0;
+				temp_tx_enable = 1'b0;
+			end
+			FIFO_CHK_RX:
+			begin 
+				temp_rx_enable = 1'b0;
+				temp_SCL_out_slave = 1'b0;
+				temp_busy_slave = 1'b0;
+				temp_TX_read_enable_slave = 1'b0;
+				temp_RX_write_enable_slave = 1'b0;
+				temp_ack_error_set_slave = 1'b0;
+				temp_sda_mode = 2'b00;
+				temp_load_data = 1'b0;
+				temp_tx_enable = 1'b0;
+			end
+			SEND_1:
+			begin 
+				temp_rx_enable = 1'b1;
+				temp_SCL_out_slave = 1'b0;
+				temp_busy_slave = 1'b0;
+				temp_TX_read_enable_slave = 1'b0;
+				temp_RX_write_enable_slave = 1'b0;
+				temp_ack_error_set_slave = 1'b0;
+				temp_sda_mode = 2'b00;
+				temp_load_data = 1'b0;
+				temp_tx_enable = 1'b0;
+			end
+			SEND_ACK:
+			begin 
+				temp_rx_enable = 1'b0;
+				temp_SCL_out_slave = 1'b0;
+				temp_busy_slave = 1'b0;
+				temp_TX_read_enable_slave = 1'b0;
+				temp_RX_write_enable_slave = 1'b0;
+				temp_ack_error_set_slave = 1'b0;
+				temp_sda_mode = 2'b01;
+				temp_load_data = 1'b0;
+				temp_tx_enable = 1'b0;
+			end
+			SEND_NACK:
+			begin 
+				temp_rx_enable = 1'b0;
+				temp_SCL_out_slave = 1'b0;
+				temp_busy_slave = 1'b0;
+				temp_TX_read_enable_slave = 1'b0;
+				temp_RX_write_enable_slave = 1'b0;
+				temp_ack_error_set_slave = 1'b0;
+				temp_sda_mode = 2'b10;
+				temp_load_data = 1'b0;
+				temp_tx_enable = 1'b0;
+			end
+			SEND_2:
+			begin 
+				temp_rx_enable = 1'b0;
+				temp_SCL_out_slave = 1'b0;
+				temp_busy_slave = 1'b0;
+				temp_TX_read_enable_slave = 1'b0;
+				temp_RX_write_enable_slave = 1'b1;
+				temp_ack_error_set_slave = 1'b0;
+				temp_sda_mode = 2'b00;
+				temp_load_data = 1'b0;
+				temp_tx_enable = 1'b0;
+			end
+
+			default :
+			begin
+				temp_rx_enable = 1'b0;
+				temp_SCL_out_slave = 1'b0;
+				temp_busy_slave = 1'b0;
+				temp_TX_read_enable_slave = 1'b0;
+				temp_RX_write_enable_slave = 1'b0;
+				temp_ack_error_set_slave = 1'b0;
+				temp_sda_mode = 2'b00;
+				temp_load_data = 1'b0;
+				temp_tx_enable = 1'b0;
+			end
+		endcase
+	end
 endmodule 
