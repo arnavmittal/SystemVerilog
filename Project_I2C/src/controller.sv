@@ -17,8 +17,7 @@ module controller
 	input wire byte_received,
 	input wire ack_prep,
 	input wire ack_check,
-	input wire ack_done
-
+	input wire ack_done,
 	output reg rx_enable,
 	output reg SCL_out_slave,
 	output reg busy_slave,
@@ -27,7 +26,7 @@ module controller
 	output reg ack_error_set_slave,
 	output reg [1:0] sda_mode,
 	output reg load_data,
-	output reg tx_enable,
+	output reg tx_enable
 );
 
 	typedef enum logic [4:0] {IDLE, GET_ADDR_1, CHECK_ADDR_1, NO_MATCH, ACK_SEND_1, GET_ADDR_2, CHECK_ADDR_2, ACK_SEND_2, FIFO_CHK_TX, LOAD, DATA_START, DATA_STOP, ACK_CHECK, READ_ENABLE, RE_NACK, RE_ACK, FIFO_CHK_RX, SEND_1, SEND_ACK, SEND_NACK, SEND_2} state_type;
@@ -323,7 +322,7 @@ module controller
 			begin 
 				temp_rx_enable = 1'b1;
 				temp_SCL_out_slave = 1'b0;
-				temp_busy_slave = 1'b0;
+				temp_busy_slave = 1'b1;
 				temp_TX_read_enable_slave = 1'b0;
 				temp_RX_write_enable_slave = 1'b0;
 				temp_ack_error_set_slave = 1'b0;
@@ -336,7 +335,7 @@ module controller
 			begin 
 				temp_rx_enable = 1'b0;
 				temp_SCL_out_slave = 1'b0;
-				temp_busy_slave = 1'b0;
+				temp_busy_slave = 1'b1;
 				temp_TX_read_enable_slave = 1'b0;
 				temp_RX_write_enable_slave = 1'b0;
 				temp_ack_error_set_slave = 1'b0;
@@ -349,7 +348,7 @@ module controller
 			begin 
 				temp_rx_enable = 1'b1;
 				temp_SCL_out_slave = 1'b0;
-				temp_busy_slave = 1'b0;
+				temp_busy_slave = 1'b1;
 				temp_TX_read_enable_slave = 1'b0;
 				temp_RX_write_enable_slave = 1'b0;
 				temp_ack_error_set_slave = 1'b0;
@@ -361,7 +360,7 @@ module controller
 			begin 
 				temp_rx_enable = 1'b0;
 				temp_SCL_out_slave = 1'b0;
-				temp_busy_slave = 1'b0;
+				temp_busy_slave = 1'b1;
 				temp_TX_read_enable_slave = 1'b0;
 				temp_RX_write_enable_slave = 1'b0;
 				temp_ack_error_set_slave = 1'b0;
@@ -373,7 +372,7 @@ module controller
 			begin 
 				temp_rx_enable = 1'b1;
 				temp_SCL_out_slave = 1'b0;
-				temp_busy_slave = 1'b0;
+				temp_busy_slave = 1'b1;
 				temp_TX_read_enable_slave = 1'b0;
 				temp_RX_write_enable_slave = 1'b0;
 				temp_ack_error_set_slave = 1'b0;
@@ -385,7 +384,7 @@ module controller
 			begin 
 				temp_rx_enable = 1'b0;
 				temp_SCL_out_slave = 1'b0;
-				temp_busy_slave = 1'b0;
+				temp_busy_slave = 1'b1;
 				temp_TX_read_enable_slave = 1'b0;
 				temp_RX_write_enable_slave = 1'b0;
 				temp_ack_error_set_slave = 1'b0;
@@ -397,7 +396,7 @@ module controller
 			begin 
 				temp_rx_enable = 1'b0;
 				temp_SCL_out_slave = 1'b0;
-				temp_busy_slave = 1'b0;
+				temp_busy_slave = 1'b1;
 				temp_TX_read_enable_slave = 1'b0;
 				temp_RX_write_enable_slave = 1'b0;
 				temp_ack_error_set_slave = 1'b0;
@@ -409,7 +408,7 @@ module controller
 			begin 
 				temp_rx_enable = 1'b0;
 				temp_SCL_out_slave = 1'b0;
-				temp_busy_slave = 1'b0;
+				temp_busy_slave = 1'b1;
 				temp_TX_read_enable_slave = 1'b0;
 				temp_RX_write_enable_slave = 1'b0;
 				temp_ack_error_set_slave = 1'b0;
@@ -421,7 +420,7 @@ module controller
 			begin 
 				temp_rx_enable = 1'b0;
 				temp_SCL_out_slave = 1'b0;
-				temp_busy_slave = 1'b0;
+				temp_busy_slave = 1'b1;
 				temp_TX_read_enable_slave = 1'b0;
 				temp_RX_write_enable_slave = 1'b0;
 				temp_ack_error_set_slave = 1'b0;
@@ -433,7 +432,7 @@ module controller
 			begin 
 				temp_rx_enable = 1'b0;
 				temp_SCL_out_slave = 1'b0;
-				temp_busy_slave = 1'b0;
+				temp_busy_slave = 1'b1;
 				temp_TX_read_enable_slave = 1'b0;
 				temp_RX_write_enable_slave = 1'b0;
 				temp_ack_error_set_slave = 1'b0;
@@ -445,7 +444,7 @@ module controller
 			begin 
 				temp_rx_enable = 1'b0;
 				temp_SCL_out_slave = 1'b0;
-				temp_busy_slave = 1'b0;
+				temp_busy_slave = 1'b1;
 				temp_TX_read_enable_slave = 1'b0;
 				temp_RX_write_enable_slave = 1'b0;
 				temp_ack_error_set_slave = 1'b0;
@@ -457,7 +456,7 @@ module controller
 			begin 
 				temp_rx_enable = 1'b0;
 				temp_SCL_out_slave = 1'b0;
-				temp_busy_slave = 1'b0;
+				temp_busy_slave = 1'b1;
 				temp_TX_read_enable_slave = 1'b0;
 				temp_RX_write_enable_slave = 1'b0;
 				temp_ack_error_set_slave = 1'b0;
@@ -469,7 +468,7 @@ module controller
 			begin 
 				temp_rx_enable = 1'b0;
 				temp_SCL_out_slave = 1'b0;
-				temp_busy_slave = 1'b0;
+				temp_busy_slave = 1'b1;
 				temp_TX_read_enable_slave = 1'b1;
 				temp_RX_write_enable_slave = 1'b0;
 				temp_ack_error_set_slave = 1'b0;
@@ -481,10 +480,10 @@ module controller
 			begin 
 				temp_rx_enable = 1'b0;
 				temp_SCL_out_slave = 1'b0;
-				temp_busy_slave = 1'b0;
+				temp_busy_slave = 1'b1;
 				temp_TX_read_enable_slave = 1'b0;
 				temp_RX_write_enable_slave = 1'b0;
-				temp_ack_error_set_slave = 1'b0;
+				temp_ack_error_set_slave = 1'b1;
 				temp_sda_mode = 2'b00;
 				temp_load_data = 1'b0;
 				temp_tx_enable = 1'b0;
@@ -493,7 +492,7 @@ module controller
 			begin 
 				temp_rx_enable = 1'b0;
 				temp_SCL_out_slave = 1'b0;
-				temp_busy_slave = 1'b0;
+				temp_busy_slave = 1'b1;
 				temp_TX_read_enable_slave = 1'b0;
 				temp_RX_write_enable_slave = 1'b0;
 				temp_ack_error_set_slave = 1'b0;
@@ -505,7 +504,7 @@ module controller
 			begin 
 				temp_rx_enable = 1'b0;
 				temp_SCL_out_slave = 1'b0;
-				temp_busy_slave = 1'b0;
+				temp_busy_slave = 1'b1;
 				temp_TX_read_enable_slave = 1'b0;
 				temp_RX_write_enable_slave = 1'b0;
 				temp_ack_error_set_slave = 1'b0;
@@ -517,7 +516,7 @@ module controller
 			begin 
 				temp_rx_enable = 1'b1;
 				temp_SCL_out_slave = 1'b0;
-				temp_busy_slave = 1'b0;
+				temp_busy_slave = 1'b1;
 				temp_TX_read_enable_slave = 1'b0;
 				temp_RX_write_enable_slave = 1'b0;
 				temp_ack_error_set_slave = 1'b0;
@@ -529,7 +528,7 @@ module controller
 			begin 
 				temp_rx_enable = 1'b0;
 				temp_SCL_out_slave = 1'b0;
-				temp_busy_slave = 1'b0;
+				temp_busy_slave = 1'b1;
 				temp_TX_read_enable_slave = 1'b0;
 				temp_RX_write_enable_slave = 1'b0;
 				temp_ack_error_set_slave = 1'b0;
@@ -541,7 +540,7 @@ module controller
 			begin 
 				temp_rx_enable = 1'b0;
 				temp_SCL_out_slave = 1'b0;
-				temp_busy_slave = 1'b0;
+				temp_busy_slave = 1'b1;
 				temp_TX_read_enable_slave = 1'b0;
 				temp_RX_write_enable_slave = 1'b0;
 				temp_ack_error_set_slave = 1'b0;
@@ -553,7 +552,7 @@ module controller
 			begin 
 				temp_rx_enable = 1'b0;
 				temp_SCL_out_slave = 1'b0;
-				temp_busy_slave = 1'b0;
+				temp_busy_slave = 1'b1;
 				temp_TX_read_enable_slave = 1'b0;
 				temp_RX_write_enable_slave = 1'b1;
 				temp_ack_error_set_slave = 1'b0;
