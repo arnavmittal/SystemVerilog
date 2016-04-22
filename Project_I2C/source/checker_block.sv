@@ -1,4 +1,4 @@
-// Description: This is the module for the Checker block
+// Description: This is the module for the Checker block.
 
 module checker_block
 (

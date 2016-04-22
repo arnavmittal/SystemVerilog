@@ -1,4 +1,4 @@
-// Description: This is the module for the SCL Edge Detector
+// Description: This is the module for the SCL Edge Detector.
 
 module edge_detect
 (

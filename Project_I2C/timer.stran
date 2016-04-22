@@ -1,4 +1,4 @@
-# //  ModelSim SE-64 10.2b May 16 2013 Linux 2.6.32-573.18.1.el6.x86_64
+# //  ModelSim SE-64 10.2b May 16 2013 Linux 2.6.32-573.22.1.el6.x86_64
 # //
 # //  Copyright 1991-2013 Mentor Graphics Corporation
 # //  All Rights Reserved.
@@ -15,4 +15,5 @@
 # Loading work.timer(fast)
 # ** Warning: (vsim-8634) Code was not compiled with coverage options.
 add wave *
+run 2000 ns
 run 2000 ns

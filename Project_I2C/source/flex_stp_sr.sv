@@ -1,9 +1,3 @@
-// $Id: $
-// File name:   flex_stp_sr.sv
-// Created:     1/29/2016
-// Author:      Arnav Mittal
-// Lab Section: 337-05
-// Version:     1.0  Initial Design Entry
 // Description: This is the module for a N-Bit Serial-To-Parallel Shift register.
 
 module flex_stp_sr
