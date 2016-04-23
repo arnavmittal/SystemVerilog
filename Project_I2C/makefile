@@ -16,12 +16,12 @@ include /home/ecegrid/a/ece337/Course_Prod/course_make_vars
 # (do not include the source folder in the name)
 # NOTE: YOU WILL NEED TO SET THIS VARIABLE'S VALUE WHEN WORKING WITH HEIRARCHICAL DESIGNS
 # AND THE AUTOMATED GRADING SYSTEM
-COMPONENT_FILES	:= controller.sv flex_pts_sr.sv flex_stp_sr.sv pts_sr_tx.sv stp_sr_rx.sv sda_select.sv edge_detect.sv
+COMPONENT_FILES	:= slave_controller.sv flex_pts_sr.sv flex_stp_sr.sv pts_sr_tx.sv stp_sr_rx.sv sda_select.sv edge_detect.sv slave_timer.sv checker_block.sv
 
 # Specify the name of the top level file (do not include the source folder in the name)
 # NOTE: YOU WILL NEED TO SET THIS VARIABLE'S VALUE WHEN WORKING WITH HEIRARCHICAL DESIGNS
 # AND THE AUTOMATED GRADING SYSTEM
-TOP_LEVEL_FILE	:= checker_block.sv
+TOP_LEVEL_FILE	:= slave_inner.sv
 
 # Specify the filepath of the test bench you want to use (ie. tb_top_level.sv)
 # (do not include the source folder in the name)

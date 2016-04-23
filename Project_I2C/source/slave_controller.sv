@@ -271,22 +271,27 @@ module slave_controller
 
 			SEND_ACK:
 			begin 
-				next_state = SEND_2;
+				if(ack_done == 1'b1) begin
+					next_state = SEND_2;
+				end
 			end
 
 			SEND_NACK:
 			begin 
-				next_state = SEND_2;
+				if(ack_done == 1'b1) begin
+					next_state = SEND_2;
+				end
 			end
 
 			SEND_2:
 			begin
-				if(ack_done == 1'b1) begin
-					next_state = FIFO_CHK_RX;
-				end
-				else if(stop == 1'b1) 
+				if(stop == 1'b1) 
 				begin
 					next_state = IDLE;
+				end
+				else
+				begin 
+					next_state = FIFO_CHK_RX;
 				end
 			end
 		endcase

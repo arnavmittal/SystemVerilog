@@ -3,7 +3,7 @@
 module sda_select
 (
 	input wire [1:0] sda_mode,
-	output wire tx_out,
+	input wire tx_out,
 	output reg SDA_out_slave
 );
 

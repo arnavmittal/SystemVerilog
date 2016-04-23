@@ -1,39 +1,56 @@
 // Description: This is the test bench for the Slave Inner block
 `timescale 1ns / 10ps
 
-module tb_slave_timer();
+module tb_slave_inner();
   
   // Define parameters
 	parameter CLK_PERIOD	= 10;
 	parameter SCL_PERIOD    = 300;
 	parameter sclwait       = 300;
   
-	reg tb_scl;
-  	reg tb_sda_in;
-
 	reg tb_clk;
-	reg tb_n_rst;
-	reg tb_start;
-	reg tb_stop;
-	reg tb_rising_edge;
-	reg tb_falling_edge;
-	reg tb_byte_received;
-	reg tb_ack_prep;
-	reg tb_ack_check;
-	reg tb_ack_done;
+  reg tb_n_rst;
+  reg [7:0] tb_tx_data;   // Data coming in from the TX FIFO
+  reg tb_address_mode;
+  reg tb_ms_select;
+  reg [9:0] tb_bus_address;
+  reg tb_en_clock_strech;
+  reg tb_TX_fifo_empty;
+  reg tb_RX_fifo_full;
+  reg tb_RX_fifo_almost_full;
+  reg tb_SDA_sync;
+  reg tb_SCL_sync;
+  reg [7:0] tb_rx_data_slave;
+  reg tb_set_transaction_complete_slave;
+  reg tb_ack_error_set_slave;
+  reg tb_busy_slave;
+  reg tb_TX_read_enable_slave;
+  reg tb_RX_write_enable_slave;
+  reg tb_SDA_out_slave;
+  reg tb_SCL_sync_out_slave;
 
-	timer DUT
+	slave_inner SLAVE_INNER
 	(
 		.clk(tb_clk),
-		.n_rst(tb_n_rst),
-		.start(tb_start),
-		.stop(tb_stop),
-		.rising_edge(tb_rising_edge),
-		.falling_edge(tb_falling_edge),
-		.byte_received(tb_byte_received),
-		.ack_prep(tb_ack_prep),
-		.ack_check(tb_ack_check),
-		.ack_done(tb_ack_done)
+    .n_rst(tb_n_rst),
+    .tx_data(tb_tx_data),
+    .address_mode(tb_address_mode),
+    .ms_select(tb_ms_select),
+    .bus_address(tb_bus_address),
+    .en_clock_strech(tb_en_clock_strech),
+    .TX_fifo_empty(tb_TX_fifo_empty),
+    .RX_fifo_full(tb_RX_fifo_full),
+    .RX_fifo_almost_full(tb_RX_fifo_almost_full),
+    .SDA_sync(tb_SDA_sync),
+    .SCL_sync(tb_SCL_sync),
+    .rx_data_slave(tb_rx_data_slave),
+    .set_transaction_complete_slave(tb_set_transaction_complete_slave),
+    .ack_error_set_slave(tb_ack_error_set_slave),
+    .busy_slave(tb_busy_slave),
+    .TX_read_enable_slave(tb_TX_read_enable_slave),
+    .RX_write_enable_slave(tb_RX_write_enable_slave),
+    .SDA_out_slave(tb_SDA_out_slave),
+    .SCL_out_slave(tb_SCL_sync_out_slave)
 	);
 	
 	always
@@ -46,21 +63,26 @@ module tb_slave_timer();
 	
 	always
 	begin : SCL_GEN
-	    tb_scl = 1'b0;
+	    tb_SCL_sync = 1'b0;
 	    #(SCL_PERIOD / 3);
-	    tb_scl = 1'b1;
+	    tb_SCL_sync = 1'b1;
 	    #(SCL_PERIOD / 3); 
-	    tb_scl = 1'b0;
+	    tb_SCL_sync = 1'b0;
 	    #(SCL_PERIOD / 3);
 	end	
 	
 	initial
 	begin 
 	  tb_n_rst = 1'b0;
-	  tb_start = 0;
-	  tb_stop = 0;    
-	  tb_rising_edge =0;
-	  tb_falling_edge =0;
+    tb_tx_data = 8'b00000000;
+    tb_address_mode = 1'b0;   // 7 Bit Mode 
+    tb_ms_select = 1'b0;      // Slave selected
+    tb_bus_address = 10'b0000000000;
+    tb_en_clock_strech = 1'b0;
+    tb_TX_fifo_empty = 1'b0;
+    tb_RX_fifo_full = 1'b0;
+    tb_RX_fifo_almost_full = 1'b0;
+    tb_SDA_sync = 1'b0;
 	  @(posedge tb_clk);
     tb_n_rst = 1'b1;
  
@@ -71,148 +93,27 @@ module tb_slave_timer();
     @(posedge tb_clk);
     @(posedge tb_clk); 
     
-    
-    //tb_start = 1'b1;
+    // Generate a Start Condition by varying SDA line.
+    tb_SDA_sync = 1'b1;
+
+    @(posedge tb_SCL_sync);
     @(posedge tb_clk);
     @(posedge tb_clk);
     @(posedge tb_clk);
     @(posedge tb_clk);
-    @(posedge tb_clk); 
-    //tb_start = 1'b0;
-    
-    @(posedge tb_scl);
-		@(posedge tb_clk);
-		tb_rising_edge=1;
-		tb_falling_edge =0;
-		@(posedge tb_clk);
-		tb_start = 1'b1;
-			
-		@(posedge tb_clk); 
-		tb_rising_edge=0;
-		tb_falling_edge =0;
-		tb_start = 1'b0;
-				
-		@(negedge tb_scl);
-		@(posedge tb_clk);
-		tb_rising_edge=0;
-		tb_falling_edge =1;
-				
-		@(posedge tb_clk); 
-		tb_rising_edge=0;
-		tb_falling_edge =0;
-    
-    
-    
+    @(posedge tb_clk);
+
+    tb_SDA_sync = 1'b0;
+
     repeat (27) begin 
-      @(posedge tb_scl);
       @(posedge tb_clk);
-      tb_rising_edge=1;
-      tb_falling_edge =0;
-  
-      @(posedge tb_clk); 
-      tb_rising_edge=0;
-      tb_falling_edge =0;
-    
-      @(negedge tb_scl);
-      @(posedge tb_clk);
-      tb_rising_edge=0;
-      tb_falling_edge =1;
-    
-      @(posedge tb_clk); 
-      tb_rising_edge=0;
-      tb_falling_edge =0;
+      @(negedge tb_clk);
     end
+
+    // Set bus_address = 0001100110.
+    // Send address 7 bit '1100110'+'1' denoting read from SDA line.
+    // Check if Ack sent by slave on 9th pulse of SCL line.
     
-    @(posedge tb_scl);
-    tb_rising_edge=1;
-    tb_falling_edge =0;
-    tb_stop =1;
-    
-    @(negedge tb_clk); 
-    tb_rising_edge=0;
-    tb_falling_edge =0;
-    
-    @(posedge tb_clk);
-    @(posedge tb_clk);
-    @(posedge tb_clk);
-    @(posedge tb_clk);
-    
-    tb_stop =0;
-    
-    @(negedge tb_scl);
-    tb_rising_edge=0;
-    tb_falling_edge =1;
-    
-    @(negedge tb_clk); 
-    tb_rising_edge=0;
-    tb_falling_edge =0;
-    
-    repeat (13) begin 
-      @(posedge tb_scl);
-      tb_rising_edge=1;
-      tb_falling_edge =0;
-    
-      @(negedge tb_clk); 
-      tb_rising_edge=0;
-      tb_falling_edge =0;
-    
-      @(negedge tb_scl);
-      tb_rising_edge=0;
-      tb_falling_edge =1;
-    
-      @(negedge tb_clk); 
-      tb_rising_edge=0;
-      tb_falling_edge =0;
-    end
-    
-    tb_start = 1'b1;
-    @(posedge tb_clk);
-    @(posedge tb_clk);
-    @(posedge tb_clk);
-    @(posedge tb_clk);
-    @(posedge tb_clk); 
-    tb_start = 1'b0;
-     
-    repeat (27) begin 
-      @(posedge tb_scl);
-      tb_rising_edge=1;
-      tb_falling_edge =0;
-    
-      @(posedge tb_clk); 
-      tb_rising_edge=0;
-      tb_falling_edge =0;
-    
-      @(negedge tb_scl);
-      tb_rising_edge=0;
-      tb_falling_edge =1;
-    
-      @(posedge tb_clk); 
-      tb_rising_edge=0;
-      tb_falling_edge =0;
-    end
-    
-    tb_start = 1'b1;
-    @(posedge tb_clk);
-    @(posedge tb_clk);
-    tb_start = 1'b0;
-     
-    repeat (27) begin 
-      @(posedge tb_scl);
-      tb_rising_edge=1;
-      tb_falling_edge =0;
-    
-      @(posedge tb_clk); 
-      tb_rising_edge=0;
-      tb_falling_edge =0;
-    
-      @(negedge tb_scl);
-      tb_rising_edge=0;
-      tb_falling_edge =1;
-    
-      @(posedge tb_clk); 
-      tb_rising_edge=0;
-      tb_falling_edge =0;
-    end
     
 	end 
 endmodule
