@@ -1,4 +1,4 @@
-// Description: This is the testbench for the Slave Timer block
+// Description: This is the test bench for the Slave Inner block
 `timescale 1ns / 10ps
 
 module tb_slave_timer();

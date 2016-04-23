@@ -1,4 +1,4 @@
-// Description: This is the module for the Checker block
+// Description: This is the test bench for the Slave Edge Detector.
 `timescale 1ns / 10ps
 
 module tb_edge_detect();

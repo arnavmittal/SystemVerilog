@@ -1,10 +1,10 @@
-
+// This is the test bench for the Slave Main Controller Block.
 `timescale 1ns / 10ps
 
 module tb_slave_controller();
 
 	// Define parameters
-	parameter CLK_PERIOD				= 10;
+	parameter CLK_PERIOD	= 10;
 	parameter SCL_PERIOD    = 300;
 
 	reg tb_clk;
