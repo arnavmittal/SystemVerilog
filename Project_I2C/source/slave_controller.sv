@@ -258,8 +258,12 @@ module slave_controller
 			end
 
 			SEND_1:
-			begin 
-				if(RX_fifo_almost_full == 1'b1 && ack_prep == 1'b1) 
+			begin
+				if(stop == 1'b1) 
+				begin
+					next_state = IDLE;
+				end 
+				else if(RX_fifo_almost_full == 1'b1 && ack_prep == 1'b1) 
 				begin
 					next_state = SEND_NACK;
 				end

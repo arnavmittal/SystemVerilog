@@ -70,14 +70,16 @@ module tb_slave_inner();
 	    tb_SCL_sync = 1'b0;
 	    #(SCL_PERIOD / 3);
 	end	
-	
+  
+  integer i;
+
 	initial
 	begin 
 	  tb_n_rst = 1'b0;
     tb_tx_data = 8'b00000000;
     tb_address_mode = 1'b0;   // 7 Bit Mode 
     tb_ms_select = 1'b0;      // Slave selected
-    tb_bus_address = 10'b0000000000;
+    tb_bus_address = 10'b0000000111;
     tb_en_clock_strech = 1'b0;
     tb_TX_fifo_empty = 1'b0;
     tb_RX_fifo_full = 1'b0;
@@ -105,9 +107,19 @@ module tb_slave_inner();
 
     tb_SDA_sync = 1'b0;
 
-    repeat (27) begin 
-      @(posedge tb_clk);
-      @(negedge tb_clk);
+    i=0;
+    repeat (20) 
+    begin
+      @(negedge tb_SCL_sync);
+      i = i+1;
+      tb_SDA_sync = 1'b0;
+      if(i == 19) 
+      begin
+         @(posedge tb_SCL_sync);
+         @(posedge tb_clk);
+         @(posedge tb_clk);
+         tb_SDA_sync = 1'b1;
+       end 
     end
 
     // Set bus_address = 0001100110.

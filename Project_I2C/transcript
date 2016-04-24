@@ -25,20 +25,7 @@
 # Loading work.sda_select(fast)
 # ** Warning: (vsim-8634) Code was not compiled with coverage options.
 add wave *
-run 10000 ns
+# (vish-4014) No objects found matching '*'.
+add wave *
 add wave -position end  sim:/tb_slave_inner/SLAVE_INNER/CONTROLLER/state
-restart -f
-# Loading sv_std.std
-# Loading work.tb_slave_inner(fast)
-# Loading work.slave_inner(fast)
-# Loading work.edge_detect(fast)
-# Loading work.stp_sr_rx(fast)
-# Loading work.flex_stp_sr(fast)
-# Loading work.checker_block(fast)
-# Loading work.slave_timer(fast)
-# Loading work.slave_controller(fast)
-# Loading work.pts_sr_tx(fast)
-# Loading work.flex_pts_sr(fast)
-# Loading work.sda_select(fast)
-# ** Warning: (vsim-8634) Code was not compiled with coverage options.
 run 10000 ns
