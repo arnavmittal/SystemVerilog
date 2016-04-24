@@ -552,7 +552,7 @@ module slave_controller
 				temp_busy_slave = 1'b1;
 				temp_TX_read_enable_slave = 1'b0;
 				temp_RX_write_enable_slave = 1'b0;
-				temp_ack_error_set_slave = 1'b0;
+				temp_ack_error_set_slave = 1'b1;
 				temp_sda_mode = 2'b10;
 				temp_load_data = 1'b0;
 				temp_tx_enable = 1'b0;

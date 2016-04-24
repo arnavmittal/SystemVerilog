@@ -72,11 +72,11 @@ module tb_slave_inner();
 	end	
   
   integer i;
-
+  integer k;
 	initial
 	begin 
 	  tb_n_rst = 1'b0;
-    tb_tx_data = 8'b00000000;
+    tb_tx_data = 8'b10110011;
     tb_address_mode = 1'b0;   // 7 Bit Mode 
     tb_ms_select = 1'b0;      // Slave selected
     tb_bus_address = 10'b0000000111;
@@ -108,12 +108,76 @@ module tb_slave_inner();
     tb_SDA_sync = 1'b0;
 
     i=0;
-    repeat (20) 
+    k=0;
+    repeat (40) 
     begin
       @(negedge tb_SCL_sync);
       i = i+1;
       tb_SDA_sync = 1'b0;
-      if(i == 19) 
+      if(i == 10)
+      begin 
+        tb_bus_address = 10'b0111011101;
+        // A9-A8 = 01 , A7-A0 = 11011101
+        @(posedge tb_SCL_sync);
+        tb_SDA_sync = 1'b1;
+        tb_address_mode = 1'b1;
+        @(posedge tb_clk);
+        @(posedge tb_clk);
+        @(posedge tb_clk);
+        tb_SDA_sync = 1'b0;
+        @(posedge tb_clk);
+        @(posedge tb_clk);
+        @(posedge tb_clk);
+        tb_SDA_sync = 1'b1;
+        // START generated
+
+        // MAKING RX_DATA = 11110010
+        repeat (3)
+        begin
+          @(negedge tb_SCL_sync);
+          tb_SDA_sync = 1'b1;
+        end
+        // RX_DATA = 00001111
+        repeat (2)
+        begin
+          @(negedge tb_SCL_sync);
+          tb_SDA_sync = 1'b0;
+        end
+        // TX_DATA = 00111100
+        @(negedge tb_SCL_sync);
+        tb_SDA_sync = 1'b1;
+        // TX_DATA = 01111001
+        @(negedge tb_SCL_sync);
+        tb_SDA_sync = 1'b0;
+        // TX_DATA = 11110010
+        @(negedge tb_SCL_sync);
+        @(negedge tb_SCL_sync);
+        k = k+1;
+        tb_SDA_sync = 1'b1;
+        @(negedge tb_SCL_sync);
+        k = k+1;
+        tb_SDA_sync = 1'b1;
+        @(negedge tb_SCL_sync);
+        k = k+1;
+        tb_SDA_sync = 1'b0;
+        @(negedge tb_SCL_sync);
+        k = k+1;
+        tb_SDA_sync = 1'b1;
+        @(negedge tb_SCL_sync);
+        k = k+1;
+        tb_SDA_sync = 1'b1;
+        @(negedge tb_SCL_sync);
+        k = k+1;
+        tb_SDA_sync = 1'b1;
+        @(negedge tb_SCL_sync);
+        k = k+1;
+        tb_SDA_sync = 1'b0;
+        @(negedge tb_SCL_sync);
+        k = k+1;
+        tb_SDA_sync = 1'b1;
+        // TX_DATA = 11011101
+      end
+      if(i == 40) 
       begin
          @(posedge tb_SCL_sync);
          @(posedge tb_clk);

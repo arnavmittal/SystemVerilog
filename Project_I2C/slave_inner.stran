@@ -24,8 +24,26 @@
 # Loading work.flex_pts_sr(fast)
 # Loading work.sda_select(fast)
 # ** Warning: (vsim-8634) Code was not compiled with coverage options.
-add wave *
-# (vish-4014) No objects found matching '*'.
-add wave *
-add wave -position end  sim:/tb_slave_inner/SLAVE_INNER/CONTROLLER/state
+do wave.do
 run 10000 ns
+run 1000 ns
+run 1000 ns
+# Causality operation skipped due to absence of debug database file
+add wave -position end  sim:/tb_slave_inner/tb_RX_write_enable_slave
+add wave -position end  sim:/tb_slave_inner/tb_TX_read_enable_slave
+restart -f
+# Loading sv_std.std
+# Loading work.tb_slave_inner(fast)
+# Loading work.slave_inner(fast)
+# Loading work.edge_detect(fast)
+# Loading work.stp_sr_rx(fast)
+# Loading work.flex_stp_sr(fast)
+# Loading work.checker_block(fast)
+# Loading work.slave_timer(fast)
+# Loading work.slave_controller(fast)
+# Loading work.pts_sr_tx(fast)
+# Loading work.flex_pts_sr(fast)
+# Loading work.sda_select(fast)
+# ** Warning: (vsim-8634) Code was not compiled with coverage options.
+run 20000 ns
+write format wave -window .main_pane.wave.interior.cs.body.pw.wf /home/ecegrid/a/mg150/ece337/Project_I2C/wave.do
