@@ -1,0 +1,117 @@
+Information: Updating design information... (UID-85)
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : slave_inner
+Version: I-2013.12-SP5-9
+Date   : Sun Apr 24 16:13:27 2016
+****************************************
+
+Operating Conditions: typical   Library: osu05_stdcells
+Wire Load Model Mode: top
+
+  Startpoint: STP_SR_RX/STP_SR_RX/parallel_out_reg[2]
+              (rising edge-triggered flip-flop)
+  Endpoint: rx_data_slave[2]
+            (output port)
+  Path Group: (none)
+  Path Type: max
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  STP_SR_RX/STP_SR_RX/parallel_out_reg[2]/CLK (DFFSR)     0.00       0.00 r
+  STP_SR_RX/STP_SR_RX/parallel_out_reg[2]/Q (DFFSR)       0.96       0.96 f
+  STP_SR_RX/STP_SR_RX/parallel_out[2] (flex_stp_sr_NUM_BITS8_SHIFT_MSB1)
+                                                          0.00       0.96 f
+  STP_SR_RX/rx_data[2] (stp_sr_rx)                        0.00       0.96 f
+  rx_data_slave[2] (out)                                  0.00       0.96 f
+  data arrival time                                                  0.96
+  --------------------------------------------------------------------------
+  (Path is unconstrained)
+
+
+1
+ 
+****************************************
+Report : area
+Design : slave_inner
+Version: I-2013.12-SP5-9
+Date   : Sun Apr 24 16:13:27 2016
+****************************************
+
+Library(s) Used:
+
+    osu05_stdcells (File: /package/eda/cells/OSU/v2.7/synopsys/lib/ami05/osu05_stdcells.db)
+
+Number of ports:                           43
+Number of nets:                            58
+Number of cells:                            7
+Number of combinational cells:              0
+Number of sequential cells:                 0
+Number of macros/black boxes:               0
+Number of buf/inv:                          0
+Number of references:                       7
+
+Combinational area:              70938.000000
+Buf/Inv area:                    10944.000000
+Noncombinational area:           77616.000000
+Macro/Black Box area:                0.000000
+Net Interconnect area:      undefined  (No wire load specified)
+
+Total cell area:                148554.000000
+Total area:                 undefined
+1
+Loading db file '/package/eda/cells/OSU/v2.7/synopsys/lib/ami05/osu05_stdcells.db'
+Information: Propagating switching activity (low effort zero delay simulation). (PWR-6)
+Warning: There is no defined clock in the design. (PWR-80)
+Warning: Design has unannotated primary inputs. (PWR-414)
+Warning: Design has unannotated sequential cell outputs. (PWR-415)
+ 
+****************************************
+Report : power
+        -hier
+        -analysis_effort low
+Design : slave_inner
+Version: I-2013.12-SP5-9
+Date   : Sun Apr 24 16:13:28 2016
+****************************************
+
+
+Library(s) Used:
+
+    osu05_stdcells (File: /package/eda/cells/OSU/v2.7/synopsys/lib/ami05/osu05_stdcells.db)
+
+
+Operating Conditions: typical   Library: osu05_stdcells
+Wire Load Model Mode: top
+
+
+Global Operating Voltage = 5    
+Power-specific unit information :
+    Voltage Units = 1V
+    Capacitance Units = 1.000000pf
+    Time Units = 1ns
+    Dynamic Power Units = 1mW    (derived from V,C,T units)
+    Leakage Power Units = 1nW
+
+
+--------------------------------------------------------------------------------
+                                       Switch   Int      Leak     Total
+Hierarchy                              Power    Power    Power    Power    %
+--------------------------------------------------------------------------------
+slave_inner                               1.537    8.889   45.906   10.426 100.0
+  SDA_SECLECT (sda_select)                0.000    0.000    0.110 1.10e-07   0.0
+  PTS_SR_TX (pts_sr_tx)                   0.294    1.205    6.092    1.498  14.4
+    PTS_SR_TX (flex_pts_sr_NUM_BITS8_SHIFT_MSB1)
+                                          0.294    1.205    5.974    1.498  14.4
+  CONTROLLER (slave_controller)           0.125    1.590   15.616    1.715  16.5
+  TIMER (slave_timer)                  1.55e-02    0.835    7.773    0.851   8.2
+  CHECKER_BLOCK (checker_block)           0.959    3.704    9.383    4.663  44.7
+  STP_SR_RX (stp_sr_rx)                   0.103    1.119    5.667    1.222  11.7
+    STP_SR_RX (flex_stp_sr_NUM_BITS8_SHIFT_MSB1)
+                                       2.40e-02    1.107    5.550    1.131  10.8
+  EDGE_DETECTOR (edge_detect)          4.13e-02    0.435    1.265    0.476   4.6
+1

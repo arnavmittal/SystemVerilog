@@ -1,0 +1,379 @@
+Synthesizing design: slave_inner.sv
+dc_shell-t -x "source -echo do_mapping.tcl"
+Warning: The environment variable 'CLASSDIR' has no value. (LBR-10)
+
+                      Design Compiler Graphical
+                            DC Ultra (TM)
+                             DFTMAX (TM)
+                         Power Compiler (TM)
+                           DesignWare (R)
+                           DC Expert (TM)
+                         Design Vision (TM)
+                          HDL Compiler (TM)
+                         VHDL Compiler (TM)
+                            DFT Compiler
+                        Library Compiler (TM)
+                         Design Compiler(R)
+
+         Version I-2013.12-SP5-9 for RHEL64 -- Jun 15, 2015
+               Copyright (c) 1988-2015 Synopsys, Inc.
+
+This software and the associated documentation are confidential and 
+proprietary to Synopsys, Inc. Your use or disclosure of this software 
+is subject to the terms and conditions of a written license agreement 
+between you, or your company, and Synopsys, Inc.
+
+Initializing...
+# Step 1:  Read in the source file
+analyze -format sverilog -lib WORK {slave_controller.sv flex_pts_sr.sv flex_stp_sr.sv pts_sr_tx.sv stp_sr_rx.sv sda_select.sv edge_detect.sv slave_timer.sv checker_block.sv slave_inner.sv}
+Running PRESTO HDLC
+Searching for ./slave_controller.sv
+Searching for /package/eda/synopsys/syn-I-2013.12-SP5-9/libraries/syn/slave_controller.sv
+Searching for /package/eda/synopsys/syn-I-2013.12-SP5-9/dw/sim_ver/slave_controller.sv
+Searching for ./source/slave_controller.sv
+Searching for ./flex_pts_sr.sv
+Searching for /package/eda/synopsys/syn-I-2013.12-SP5-9/libraries/syn/flex_pts_sr.sv
+Searching for /package/eda/synopsys/syn-I-2013.12-SP5-9/dw/sim_ver/flex_pts_sr.sv
+Searching for ./source/flex_pts_sr.sv
+Searching for ./flex_stp_sr.sv
+Searching for /package/eda/synopsys/syn-I-2013.12-SP5-9/libraries/syn/flex_stp_sr.sv
+Searching for /package/eda/synopsys/syn-I-2013.12-SP5-9/dw/sim_ver/flex_stp_sr.sv
+Searching for ./source/flex_stp_sr.sv
+Searching for ./pts_sr_tx.sv
+Searching for /package/eda/synopsys/syn-I-2013.12-SP5-9/libraries/syn/pts_sr_tx.sv
+Searching for /package/eda/synopsys/syn-I-2013.12-SP5-9/dw/sim_ver/pts_sr_tx.sv
+Searching for ./source/pts_sr_tx.sv
+Searching for ./stp_sr_rx.sv
+Searching for /package/eda/synopsys/syn-I-2013.12-SP5-9/libraries/syn/stp_sr_rx.sv
+Searching for /package/eda/synopsys/syn-I-2013.12-SP5-9/dw/sim_ver/stp_sr_rx.sv
+Searching for ./source/stp_sr_rx.sv
+Searching for ./sda_select.sv
+Searching for /package/eda/synopsys/syn-I-2013.12-SP5-9/libraries/syn/sda_select.sv
+Searching for /package/eda/synopsys/syn-I-2013.12-SP5-9/dw/sim_ver/sda_select.sv
+Searching for ./source/sda_select.sv
+Searching for ./edge_detect.sv
+Searching for /package/eda/synopsys/syn-I-2013.12-SP5-9/libraries/syn/edge_detect.sv
+Searching for /package/eda/synopsys/syn-I-2013.12-SP5-9/dw/sim_ver/edge_detect.sv
+Searching for ./source/edge_detect.sv
+Searching for ./slave_timer.sv
+Searching for /package/eda/synopsys/syn-I-2013.12-SP5-9/libraries/syn/slave_timer.sv
+Searching for /package/eda/synopsys/syn-I-2013.12-SP5-9/dw/sim_ver/slave_timer.sv
+Searching for ./source/slave_timer.sv
+Searching for ./checker_block.sv
+Searching for /package/eda/synopsys/syn-I-2013.12-SP5-9/libraries/syn/checker_block.sv
+Searching for /package/eda/synopsys/syn-I-2013.12-SP5-9/dw/sim_ver/checker_block.sv
+Searching for ./source/checker_block.sv
+Searching for ./slave_inner.sv
+Searching for /package/eda/synopsys/syn-I-2013.12-SP5-9/libraries/syn/slave_inner.sv
+Searching for /package/eda/synopsys/syn-I-2013.12-SP5-9/dw/sim_ver/slave_inner.sv
+Searching for ./source/slave_inner.sv
+Compiling source file ./source/slave_controller.sv
+Compiling source file ./source/flex_pts_sr.sv
+Compiling source file ./source/flex_stp_sr.sv
+Compiling source file ./source/pts_sr_tx.sv
+Compiling source file ./source/stp_sr_rx.sv
+Compiling source file ./source/sda_select.sv
+Compiling source file ./source/edge_detect.sv
+Compiling source file ./source/slave_timer.sv
+Compiling source file ./source/checker_block.sv
+Compiling source file ./source/slave_inner.sv
+Presto compilation completed successfully.
+Loading db file '/package/eda/cells/OSU/v2.7/synopsys/lib/ami05/osu05_stdcells.db'
+Loading db file '/package/eda/synopsys/syn-I-2013.12-SP5-9/libraries/syn/dw_foundation.sldb'
+elaborate slave_inner -lib WORK
+Loading db file '/package/eda/synopsys/syn-I-2013.12-SP5-9/libraries/syn/gtech.db'
+Loading db file '/package/eda/synopsys/syn-I-2013.12-SP5-9/libraries/syn/standard.sldb'
+  Loading link library 'osu05_stdcells'
+  Loading link library 'gtech'
+Running PRESTO HDLC
+Presto compilation completed successfully.
+Elaborated 1 design.
+Current design is now 'slave_inner'.
+Information: Building the design 'edge_detect'. (HDL-193)
+
+Inferred memory devices in process
+	in routine edge_detect line 14 in file
+		'./source/edge_detect.sv'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|     stage2_reg      | Flip-flop |   1   |  N  | N  | Y  | N  | N  | N  | N  |
+|     stage1_reg      | Flip-flop |   1   |  N  | N  | Y  | N  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully.
+Information: Building the design 'stp_sr_rx'. (HDL-193)
+Presto compilation completed successfully.
+Information: Building the design 'checker_block'. (HDL-193)
+
+Inferred memory devices in process
+	in routine checker_block line 21 in file
+		'./source/checker_block.sv'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|      stop_reg       | Flip-flop |   1   |  N  | N  | Y  | N  | N  | N  | N  |
+|    scl_mid1_reg     | Flip-flop |   1   |  N  | N  | Y  | N  | N  | N  | N  |
+|    scl_mid2_reg     | Flip-flop |   1   |  N  | N  | Y  | N  | N  | N  | N  |
+|    sda_mid1_reg     | Flip-flop |   1   |  N  | N  | Y  | N  | N  | N  | N  |
+|    sda_mid2_reg     | Flip-flop |   1   |  N  | N  | Y  | N  | N  | N  | N  |
+|     rw_mode_reg     | Flip-flop |   1   |  N  | N  | Y  | N  | N  | N  | N  |
+|  address_match_reg  | Flip-flop |   2   |  Y  | N  | Y  | N  | N  | N  | N  |
+|      start_reg      | Flip-flop |   1   |  N  | N  | Y  | N  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully.
+Information: Building the design 'slave_timer'. (HDL-193)
+
+Statistics for case statements in always block at line 44 in file
+	'./source/slave_timer.sv'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|            47            |     no/auto      |
+===============================================
+
+Statistics for case statements in always block at line 162 in file
+	'./source/slave_timer.sv'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|           168            |    auto/auto     |
+===============================================
+
+Inferred memory devices in process
+	in routine slave_timer line 24 in file
+		'./source/slave_timer.sv'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|    ack_done_reg     | Flip-flop |   1   |  N  | N  | Y  | N  | N  | N  | N  |
+|      state_reg      | Flip-flop |   4   |  Y  | N  | Y  | N  | N  | N  | N  |
+|  byte_received_reg  | Flip-flop |   1   |  N  | N  | Y  | N  | N  | N  | N  |
+|    ack_prep_reg     | Flip-flop |   1   |  N  | N  | Y  | N  | N  | N  | N  |
+|    ack_check_reg    | Flip-flop |   1   |  N  | N  | Y  | N  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully.
+Information: Building the design 'slave_controller'. (HDL-193)
+
+Statistics for case statements in always block at line 75 in file
+	'./source/slave_controller.sv'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|            78            |     no/auto      |
+===============================================
+
+Statistics for case statements in always block at line 304 in file
+	'./source/slave_controller.sv'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|           316            |    auto/auto     |
+===============================================
+
+Inferred memory devices in process
+	in routine slave_controller line 45 in file
+		'./source/slave_controller.sv'.
+=====================================================================================
+|       Register Name       |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+=====================================================================================
+|       tx_enable_reg       | Flip-flop |   1   |  N  | N  | Y  | N  | N  | N  | N  |
+|         state_reg         | Flip-flop |   5   |  Y  | N  | Y  | N  | N  | N  | N  |
+|       rx_enable_reg       | Flip-flop |   1   |  N  | N  | Y  | N  | N  | N  | N  |
+|     SCL_out_slave_reg     | Flip-flop |   1   |  N  | N  | Y  | N  | N  | N  | N  |
+|      busy_slave_reg       | Flip-flop |   1   |  N  | N  | Y  | N  | N  | N  | N  |
+| TX_read_enable_slave_reg  | Flip-flop |   1   |  N  | N  | Y  | N  | N  | N  | N  |
+| RX_write_enable_slave_reg | Flip-flop |   1   |  N  | N  | Y  | N  | N  | N  | N  |
+|  ack_error_set_slave_reg  | Flip-flop |   1   |  N  | N  | Y  | N  | N  | N  | N  |
+|       sda_mode_reg        | Flip-flop |   2   |  Y  | N  | Y  | N  | N  | N  | N  |
+|       load_data_reg       | Flip-flop |   1   |  N  | N  | Y  | N  | N  | N  | N  |
+=====================================================================================
+Presto compilation completed successfully.
+Information: Building the design 'pts_sr_tx'. (HDL-193)
+Presto compilation completed successfully.
+Information: Building the design 'sda_select'. (HDL-193)
+Presto compilation completed successfully.
+Information: Building the design 'flex_stp_sr' instantiated from design 'stp_sr_rx' with
+	the parameters "8,1". (HDL-193)
+
+Inferred memory devices in process
+	in routine flex_stp_sr_NUM_BITS8_SHIFT_MSB1 line 20 in file
+		'./source/flex_stp_sr.sv'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|  parallel_out_reg   | Flip-flop |   8   |  Y  | N  | N  | Y  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully.
+Information: Building the design 'flex_pts_sr' instantiated from design 'pts_sr_tx' with
+	the parameters "8,1". (HDL-193)
+
+Inferred memory devices in process
+	in routine flex_pts_sr_NUM_BITS8_SHIFT_MSB1 line 21 in file
+		'./source/flex_pts_sr.sv'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|  output_logic_reg   | Flip-flop |   8   |  Y  | N  | N  | Y  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully.
+uniquify
+# Step 2: Set design constraints
+# Uncomment below to set timing, area, power, etc. constraints
+# set_max_delay <delay> -from "<input>" -to "<output>"
+# set_max_area <area>
+# set_max_total_power <power> mW
+# Step 3: Compile the design
+compile -map_effort medium
+Information: Checking out the license 'DesignWare'. (SEC-104)
+Information: Evaluating DesignWare library utilization. (UISN-27)
+
+============================================================================
+| DesignWare Building Block Library  |         Version         | Available |
+============================================================================
+| Basic DW Building Blocks           | I-2013.12-DWBB_201312.5.1 |   *     |
+| Licensed DW Building Blocks        | I-2013.12-DWBB_201312.5.1 |   *     |
+============================================================================
+
+
+Information: There are 5 potential problems in your design. Please run 'check_design' for more information. (LINT-99)
+
+
+
+  Beginning Pass 1 Mapping
+  ------------------------
+  Processing 'sda_select'
+  Processing 'flex_pts_sr_NUM_BITS8_SHIFT_MSB1'
+  Processing 'pts_sr_tx'
+  Processing 'slave_controller'
+Information: The register 'SCL_out_slave_reg' is a constant and will be removed. (OPT-1206)
+  Processing 'slave_timer'
+  Processing 'checker_block'
+  Processing 'flex_stp_sr_NUM_BITS8_SHIFT_MSB1'
+  Processing 'stp_sr_rx'
+  Processing 'edge_detect'
+  Processing 'slave_inner'
+
+  Updating timing information
+Information: Updating design information... (UID-85)
+Information: Design 'slave_inner' has no optimization constraints set. (OPT-108)
+
+  Beginning Implementation Selection
+  ----------------------------------
+  Processing 'checker_block_DW01_cmp6_0'
+
+  Beginning Mapping Optimizations  (Medium effort)
+  -------------------------------
+  Structuring 'flex_pts_sr_NUM_BITS8_SHIFT_MSB1'
+  Mapping 'flex_pts_sr_NUM_BITS8_SHIFT_MSB1'
+  Structuring 'flex_stp_sr_NUM_BITS8_SHIFT_MSB1'
+  Mapping 'flex_stp_sr_NUM_BITS8_SHIFT_MSB1'
+  Structuring 'sda_select'
+  Mapping 'sda_select'
+  Structuring 'pts_sr_tx'
+  Mapping 'pts_sr_tx'
+  Structuring 'slave_controller'
+  Mapping 'slave_controller'
+  Structuring 'slave_timer'
+  Mapping 'slave_timer'
+  Structuring 'checker_block'
+  Mapping 'checker_block'
+  Structuring 'stp_sr_rx'
+  Mapping 'stp_sr_rx'
+  Structuring 'edge_detect'
+  Mapping 'edge_detect'
+
+                                  TOTAL                                      
+   ELAPSED            WORST NEG   SETUP    DESIGN                            
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT         
+  --------- --------- --------- --------- --------- -------------------------
+    0:00:01  148554.0      0.00       0.0       0.0                          
+    0:00:01  148554.0      0.00       0.0       0.0                          
+    0:00:01  148554.0      0.00       0.0       0.0                          
+    0:00:01  148554.0      0.00       0.0       0.0                          
+    0:00:01  148554.0      0.00       0.0       0.0                          
+    0:00:01  148554.0      0.00       0.0       0.0                          
+    0:00:01  148554.0      0.00       0.0       0.0                          
+    0:00:01  148554.0      0.00       0.0       0.0                          
+    0:00:01  148554.0      0.00       0.0       0.0                          
+    0:00:01  148554.0      0.00       0.0       0.0                          
+    0:00:01  148554.0      0.00       0.0       0.0                          
+    0:00:01  148554.0      0.00       0.0       0.0                          
+
+
+
+  Beginning Delay Optimization Phase
+  ----------------------------------
+
+                                  TOTAL                                      
+   ELAPSED            WORST NEG   SETUP    DESIGN                            
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT         
+  --------- --------- --------- --------- --------- -------------------------
+    0:00:01  148554.0      0.00       0.0       0.0                          
+    0:00:01  148554.0      0.00       0.0       0.0                          
+    0:00:01  148554.0      0.00       0.0       0.0                          
+
+
+  Beginning Area-Recovery Phase  (cleanup)
+  -----------------------------
+
+                                  TOTAL                                      
+   ELAPSED            WORST NEG   SETUP    DESIGN                            
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT         
+  --------- --------- --------- --------- --------- -------------------------
+    0:00:01  148554.0      0.00       0.0       0.0                          
+    0:00:01  148554.0      0.00       0.0       0.0                          
+    0:00:01  148554.0      0.00       0.0       0.0                          
+    0:00:01  148554.0      0.00       0.0       0.0                          
+    0:00:01  148554.0      0.00       0.0       0.0                          
+    0:00:01  148554.0      0.00       0.0       0.0                          
+    0:00:01  148554.0      0.00       0.0       0.0                          
+    0:00:01  148554.0      0.00       0.0       0.0                          
+    0:00:01  148554.0      0.00       0.0       0.0                          
+    0:00:01  148554.0      0.00       0.0       0.0                          
+    0:00:01  148554.0      0.00       0.0       0.0                          
+Loading db file '/package/eda/cells/OSU/v2.7/synopsys/lib/ami05/osu05_stdcells.db'
+
+  Optimization Complete
+  ---------------------
+# Step 4: Output reports
+report_timing -path full -delay max -max_paths 1 -nworst 1 > reports/slave_inner.rep
+report_area >> reports/slave_inner.rep
+report_power -hier >> reports/slave_inner.rep
+# Step 5: Output final VHDL and Verilog files
+write_file -format verilog -hierarchy -output "mapped/slave_inner.v"
+Writing verilog file '/home/ecegrid/a/mg150/ece337/Project_I2C/mapped/slave_inner.v'.
+Warning: Verilog 'assign' or 'tran' statements are written out. (VO-4)
+echo "\nScript Done\n"
+
+Script Done
+
+echo "\nChecking Design\n"
+
+Checking Design
+
+check_design
+ 
+****************************************
+check_design summary:
+Version:     I-2013.12-SP5-9
+Date:        Sun Apr 24 16:13:28 2016
+****************************************
+
+                   Name                                            Total
+--------------------------------------------------------------------------------
+Inputs/Outputs                                                      5
+    Unconnected ports (LINT-28)                                     3
+    Constant outputs (LINT-52)                                      2
+--------------------------------------------------------------------------------
+
+Warning: In design 'slave_inner', port 'ms_select' is not connected to any nets. (LINT-28)
+Warning: In design 'slave_controller', port 'RX_fifo_full' is not connected to any nets. (LINT-28)
+Warning: In design 'slave_controller', port 'byte_received' is not connected to any nets. (LINT-28)
+Warning: In design 'slave_inner', output port 'SCL_out_slave' is connected directly to 'logic 0'. (LINT-52)
+Warning: In design 'slave_controller', output port 'SCL_out_slave' is connected directly to 'logic 0'. (LINT-52)
+quit
+
+Thank you...
+Done
+
+

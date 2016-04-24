@@ -168,19 +168,19 @@ module slave_timer
 		case (state)
 			PREP:
 			begin 
-				byte_received = 1'b1;
-				ack_prep = 1'b1;
+				temp_byte_received = 1'b1;
+				temp_ack_prep = 1'b1;
 			end
 
 			CHECK:
 			begin 
-				byte_received = 1'b1;
-				ack_check = 1'b1;
+				temp_byte_received = 1'b1;
+				temp_ack_check = 1'b1;
 			end
 
 			DONE:
 			begin 
-				ack_done = 1'b1;
+				temp_ack_done = 1'b1;
 			end
 			default :
 			begin 
