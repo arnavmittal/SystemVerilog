@@ -24,3 +24,5 @@
 # Loading work.flex_pts_sr(fast)
 # Loading work.sda_select(fast)
 # ** Warning: (vsim-8634) Code was not compiled with coverage options.
+do wave.do
+run 30000 ns

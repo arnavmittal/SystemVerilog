@@ -7,7 +7,7 @@ Report : timing
         -max_paths 1
 Design : slave_inner
 Version: I-2013.12-SP5-9
-Date   : Sun Apr 24 16:13:27 2016
+Date   : Mon Apr 25 19:58:00 2016
 ****************************************
 
 Operating Conditions: typical   Library: osu05_stdcells
@@ -39,7 +39,7 @@ Wire Load Model Mode: top
 Report : area
 Design : slave_inner
 Version: I-2013.12-SP5-9
-Date   : Sun Apr 24 16:13:27 2016
+Date   : Mon Apr 25 19:58:00 2016
 ****************************************
 
 Library(s) Used:
@@ -76,7 +76,7 @@ Report : power
         -analysis_effort low
 Design : slave_inner
 Version: I-2013.12-SP5-9
-Date   : Sun Apr 24 16:13:28 2016
+Date   : Mon Apr 25 19:58:00 2016
 ****************************************
 
 
